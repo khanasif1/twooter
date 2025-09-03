@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "twooter"
+version = "1.0.6"
+description = "CLI and SDK for interacting with the CTN CTF."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+authors = [{ name = "rdttl", email = "rdttl@proton.me" }]
+dependencies = ["requests>=2.31.0"]
+keywords = ["twooter", "ctn"]
+
+[project.urls]
+Homepage = "https://github.com/capturethenarrative/twooter"
+Issues = "https://github.com/capturethenarrative/twooter/issues"
+
+[project.scripts]
+twooter = "twooter.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/twooter"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/twooter/**",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+]

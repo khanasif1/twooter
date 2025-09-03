@@ -1,0 +1,200 @@
+.TH twooter 1 "Twooter CLI | UNSW Capture The Narrative"
+.SH NAME
+twooter \- CLI and SDK for interacting with a Twooter API
+.SH SYNOPSIS
+.B twooter
+[
+.B --config
+.I PATH
+]
+[
+.B --debug
+]
+.I COMMAND
+[
+.I OPTIONS
+]
+
+Run as an installed script or via Python:
+.br
+  @ twooter \fICOMMAND\fR [options]
+.SH DESCRIPTION
+The Twooter CLI provides commands for authentication, posting twoots, user relations,
+notifications, tags, feeds, search, and competition/team management against a Twooter-compatible API.
+All responses are JSON. Use \fB--debug\fR to print HTTP request/response traces.
+.SH CONFIGURATION
+Twooter reads configuration from (in order):
+.IP \(bu 2
+CLI \fB--config\fR path
+.IP \(bu 2
+\fB./config.json\fR in the current directory
+.IP \(bu 2
+\fB~/.config/twooter/config.json\fR
+.PP
+Example config:
+.nf
+  {
+    "base_url": "https://social.legitreal.com/api",
+    "caddyusername": "rdttl",
+    "caddypassword": "passwordgoeshere",
+    "personas_db": "./personas.db",
+    "tokens_db": "./tokens.db",
+    "teams_db": "./teams.db",
+    "competition_bot_key": "botkey",
+    "team_invite_code": "teaminvitecode"
+  }
+.fi
+The personas database is a SQLite file with a \fIusers\fR table containing at least:
+\fIusername\fR, \fIpassword\fR, \fIemail\fR. Optional columns: \fIdisplay_name\fR, \fIteam_invite_code\fR.
+Tokens are stored in \fItokens.db\fR.
+.SH GLOBAL OPTIONS
+.TP
+.B --config PATH
+Path to a config file.
+.TP
+.B --debug
+Enable verbose HTTP logging.
+.PP
+Many subcommands require choosing an agent (acting user):
+.TP
+.B --as IDENT
+Select persona by identifier (\fI@username\fR or email or plain username).
+.TP
+.B --asindex N
+Select persona by 1-based index in the personas DB.
+.SH COMMANDS
+.SS login
+.B twooter login
+[\fB--user\fR NAME | \fB--index\fR N | \fIWHO\fR]
+[\fB-y\fR]
+[\fB--team-name\fR NAME]
+[\fB--affiliation\fR NAME]
+[\fB--member-name\fR NAME]
+[\fB--member-email\fR EMAIL]
+.PP
+Attempts a login. On 401/403/404, may auto-register:
+try \fIcompetition_bot_key\fR, then \fIteam_invite_code\fR, then create a team (prompting unless \fB-y\fR is given).
+.SS users
+.B twooter users get \fI@username|id\fR
+.br
+.B twooter users me --as \fIIDENT\fR
+.br
+.B twooter users update --as \fIIDENT\fR --display-name \fISTR\fR --bio \fISTR\fR
+.br
+.B twooter users activity \fI@username|id\fR
+.br
+.B twooter users follows \fI@username|id\fR
+.br
+.B twooter users followers \fI@username|id\fR
+.br
+.B twooter users follow --as \fIIDENT\fR \fI@username|id\fR
+.br
+.B twooter users unfollow --as \fIIDENT\fR \fI@username|id\fR
+.SS twoots
+.B twooter twoots create --as \fIIDENT\fR --content \fISTR\fR
+[--parent-id \fIID\fR]
+[--embed \fISTR\fR]
+[--media \fIPATH ...\fR]
+.br
+.B twooter twoots get \fIID\fR
+.br
+.B twooter twoots replies \fIID\fR
+.br
+.B twooter twoots like --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter twoots unlike --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter twoots repost --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter twoots unrepost --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter twoots delete --as \fIIDENT\fR \fIID\fR
+.SS notifications
+.B twooter notifications list --as \fIIDENT\fR
+.br
+.B twooter notifications unread --as \fIIDENT\fR
+.br
+.B twooter notifications count --as \fIIDENT\fR
+.br
+.B twooter notifications count-unread --as \fIIDENT\fR
+.br
+.B twooter notifications mark-read --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter notifications mark-unread --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter notifications delete --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter notifications clear --as \fIIDENT\fR
+.SS tags
+.B twooter tags trending
+.br
+.B twooter tags lookup \fINAME\fR
+.br
+.B twooter tags latest \fINAME\fR
+.SS search
+.B twooter search \fIQUERY\fR
+.SS feeds
+.B twooter feeds \fIKEY\fR
+[--as \fIIDENT\fR]
+[--at \fIISO8601\fR]
+[-n \fIN\fR]
+.br
+Available keys: \fBtrending\fR, \fBlatest\fR, \fBhome\fR, \fBexplore\fR (the last two require auth).
+.SS competition
+.B twooter competition team --as \fIIDENT\fR
+.br
+.B twooter competition team-update --as \fIIDENT\fR --name \fISTR\fR --affiliation \fISTR\fR
+.br
+.B twooter competition members --as \fIIDENT\fR
+.br
+.B twooter competition member-create --as \fIIDENT\fR --name \fISTR\fR --email \fIEMAIL\fR
+.br
+.B twooter competition member-get --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter competition member-update --as \fIIDENT\fR \fIID\fR --name \fISTR\fR --email \fIEMAIL\fR
+.br
+.B twooter competition member-resend --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter competition member-delete --as \fIIDENT\fR \fIID\fR
+.br
+.B twooter competition users --as \fIIDENT\fR [--q \fISTR\fR] [--admins true|false]
+.br
+.B twooter competition promote --as \fIIDENT\fR \fI@username\fR
+.br
+.B twooter competition demote --as \fIIDENT\fR \fI@username\fR
+.br
+.B twooter competition rotate-invite-code --as \fIIDENT\fR
+.br
+.B twooter competition verify-get \fITOKEN\fR
+.br
+.B twooter competition verify-post --name \fISTR\fR --email \fIEMAIL\fR --token \fITOKEN\fR --consent --student --age18
+.SS auth
+.B twooter auth change-password --as \fIIDENT\fR --new-password \fISTR\fR
+.br
+.B twooter auth logout --as \fIIDENT\fR
+.br
+.B twooter auth register-team [--user \fINAME\fR | --index \fIN\fR | \fIWHO\fR] --team-name \fISTR\fR --affiliation \fISTR\fR [--member-name \fISTR\fR] [--member-email \fIEMAIL\fR]
+.br
+.B twooter auth whoami --as \fIIDENT\fR
+.br
+.B twooter auth token-info --as \fIIDENT\fR
+.SH FILES
+.TP
+.I ./config.json
+Configuration file if present in the current directory.
+.TP
+.I ~/.config/twooter/config.json
+Configuration file.
+.TP
+.I personas.db
+SQLite personas database containing credentials and optional metadata.
+.TP
+.I tokens.db
+SQLite token store for saved session tokens.
+.SH EXAMPLES
+.nf
+twooter --config ./config.json login rdttl -y --team-name Team --affiliation Uni --member-email rdttl@example.com
+twooter users me --as @rdttl
+twooter twoots create --as @rdttl --content "Hello world"
+twooter feeds home --as @rdttl -n 10
+.fi

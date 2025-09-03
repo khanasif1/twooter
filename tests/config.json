@@ -1,0 +1,10 @@
+{
+  "base_url": "https://social.legitreal.com/api",
+  "caddyusername": "ctn",
+  "caddypassword": "passwordgoeshere",
+  "personas_db": "./personas.db",
+  "tokens_db": "./tokens.db",
+  "teams_db": "./teams.db",
+  "competition_bot_key": "botkey",
+  "team_invite_code": "teaminvitecode"
+}
