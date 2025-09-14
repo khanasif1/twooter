@@ -93,6 +93,26 @@ def parse_args() -> argparse.Namespace:
     add_agent(twd)
     twd.add_argument("post_id", type=int)
 
+    twe = tw_sub.add_parser("embed")
+    twe.add_argument("post_id", type=int)
+
+    twald = tw_sub.add_parser("allowed-link-domains")
+
+    twrep = tw_sub.add_parser("report")
+    add_agent(twrep)
+    twrep.add_argument("post_id", type=int)
+    twrep.add_argument("--reason", required=True)
+
+    twvis = tw_sub.add_parser("visibility")
+    add_agent(twvis)
+    twvis.add_argument("post_id", type=int)
+    twvis.add_argument("--visibility", required=True, choices=["default", "safe", "manually_hidden", "needs-review"])
+
+    twpi = tw_sub.add_parser("prompt-injection")
+    add_agent(twpi)
+    twpi.add_argument("post_id", type=int)
+    twpi.add_argument("--value", required=True, choices=["true", "false"], help="Enable or disable prompt injection flag")
+
     no = sub.add_parser("notifications")
     no_sub = no.add_subparsers(dest="notifications_cmd", required=True)
     nli = no_sub.add_parser("list")
@@ -134,9 +154,10 @@ def parse_args() -> argparse.Namespace:
             "'home' and 'explore' require authentication (use --as/--asindex)."
         ),)
     add_agent(fe)
-    fe.add_argument("key")
+    fe.add_argument("key", nargs="?")
     fe.add_argument("--at")
     fe.add_argument("-n", "--n", type=int)
+    fe.add_argument("--list", action="store_true", help="List available feeds instead of fetching one")
 
     co = sub.add_parser("competition")
     co_sub = co.add_subparsers(dest="competition_cmd", required=True)
@@ -217,4 +238,3 @@ def parse_args() -> argparse.Namespace:
     add_agent(aut)
 
     return p.parse_args()
-

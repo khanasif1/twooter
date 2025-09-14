@@ -203,6 +203,24 @@ class Twooter:
         u = self._need_agent()
         return self._client.twoots.delete(u, post_id)
 
+    def post_get_embed(self, post_id: int) -> Dict[str, Any]:
+        return self._client.twoots.get_embed(post_id)
+
+    def post_allowed_link_domains(self) -> Dict[str, Any]:
+        return self._client.twoots.allowed_link_domains()
+
+    def post_report(self, post_id: int, reason: str) -> Dict[str, Any]:
+        u = self._need_agent()
+        return self._client.twoots.report(u, post_id, reason)
+
+    def post_set_visibility(self, post_id: int, visibility: str) -> Dict[str, Any]:
+        u = self._need_agent()
+        return self._client.twoots.set_visibility(u, post_id, visibility)
+
+    def post_set_prompt_injection(self, post_id: int, value: bool) -> Dict[str, Any]:
+        u = self._need_agent()
+        return self._client.twoots.set_prompt_injection(u, post_id, value)
+
     # ---------- notifications endpoints ----------
 
     def notifications_list(self) -> Dict[str, Any]:
@@ -271,6 +289,10 @@ class Twooter:
                         out = {**out, k: out[k][:top_n]}
                         break
         return out
+
+    def feeds_list(self, agent: Optional[str] = None) -> Dict[str, Any]:
+        who = agent or self._agent
+        return self._client.feeds.list(who)
 
     # ---------- competition endpoints ----------
 

@@ -141,15 +141,13 @@ class TwooterClient:
         bot_key: Optional[str],
         fallback_team_name: Optional[str],
     ) -> Optional[requests.Response]:
-        payload = {"username": username, "display_name": display_name, "password": password}
-        if bot_key:
-            payload["competition_bot_key"] = bot_key
-        elif invite_code:
-            payload["invite_code"] = invite_code
-        elif fallback_team_name:
-            payload["invite_code"] = fallback_team_name
-
-        r = self.api.post(self.register_path, json_body=payload)
+        r = self.auth.register(
+            username=username,
+            display_name=display_name,
+            password=password,
+            invite_code=(invite_code or fallback_team_name),
+            competition_bot_key=bot_key,
+        )
         if r.status_code in (200, 201, 409):
             return r
         return None

@@ -220,6 +220,26 @@ def main() -> None:
                 if not u:
                     raise SystemExit("--as or --asindex required for twoots delete")
                 out = client.twoots.delete(u, args.post_id)
+            elif sc == "embed":
+                out = client.twoots.get_embed(args.post_id)
+            elif sc == "allowed-link-domains":
+                out = client.twoots.allowed_link_domains()
+            elif sc == "report":
+                u = resolve_agent()
+                if not u:
+                    raise SystemExit("--as or --asindex required for twoots report")
+                out = client.twoots.report(u, args.post_id, args.reason)
+            elif sc == "visibility":
+                u = resolve_agent()
+                if not u:
+                    raise SystemExit("--as or --asindex required for twoots visibility")
+                out = client.twoots.set_visibility(u, args.post_id, args.visibility)
+            elif sc == "prompt-injection":
+                u = resolve_agent()
+                if not u:
+                    raise SystemExit("--as or --asindex required for twoots prompt-injection")
+                val = True if args.value == "true" else False
+                out = client.twoots.set_prompt_injection(u, args.post_id, val)
             else:
                 raise SystemExit("Unknown twoots subcommand")
             json_print(out)
@@ -269,6 +289,13 @@ def main() -> None:
             return
 
         if cmd == "feeds":
+            u = resolve_agent()
+            if getattr(args, "list", False):
+                out = client.feeds.list(u) if u else client.feeds.list()
+                json_print(out)
+                return
+            if not getattr(args, "key", None):
+                raise SystemExit("Provide a feed key (e.g. trending, latest, home, explore) or use --list")
             at = None
             if getattr(args, "at", None):
                 try:
@@ -277,7 +304,6 @@ def main() -> None:
                     raise SystemExit(
                         "--at must be an ISO8601 timestamp, e.g., 2045-01-23T12:34:56")
             n = getattr(args, "n", None)
-            u = resolve_agent()
             out = client.feeds.feed(args.key, at, u)
             if isinstance(n, int) and n > 0:
                 if isinstance(out, list):

@@ -78,6 +78,9 @@ Key commands and examples:
   - `twooter twoots repost --as @rdttl 123`
   - `twooter twoots unrepost --as @rdttl 123`
   - `twooter twoots delete --as @rdttl 123`
+  - `twooter twoots embed 123`
+  - `twooter twoots allowed-link-domains`
+  - `twooter twoots report --as @rdttl 123 --reason "spam"`
   - Optional flags on create: `--parent-id`, `--embed`, `--media path1 path2 ...`
 
 - Notifications (all require `--as/--asindex`):
@@ -100,6 +103,7 @@ Key commands and examples:
     - `twooter feeds trending`
     - `twooter feeds home --as @rdttl`
     - `twooter feeds latest --at 2024-08-10T12:34:56 -n 10`
+    - `twooter feeds --list` (listing available feeds)
 
 - Competition/team admin:
   - `twooter competition team --as @rdttl`

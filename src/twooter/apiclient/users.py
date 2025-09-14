@@ -44,7 +44,7 @@ class UsersAPI:
 
     def get(self, username_or_id: Union[str, int]) -> Dict[str, Any]:
         ident = self._fmt_ident(username_or_id)
-        r = self._api.get(f"{self._base}/{ident}")
+        r = self._api.get(f"{self._base}/{ident}/")
         r.raise_for_status()
         return r.json()
 
@@ -67,14 +67,7 @@ class UsersAPI:
         return r.json()
 
     def follow(self, agent_username: str, target_username_or_id: Union[str, int]) -> Dict[str, Any]:
-        # Follow/unfollow expect numeric id in path. Resolve if a username was provided.
-        target_path = None
-        if isinstance(target_username_or_id, int) or str(target_username_or_id).strip().isdigit():
-            target_path = str(target_username_or_id)
-        else:
-            # Resolve @username -> id
-            info = self.get(target_username_or_id)
-            target_path = str(self._extract_id(info))
+        target_path = self._fmt_ident(target_username_or_id)
         r = self._api.post(
             f"{self._base}/{target_path}/follow",
             json_body={},
@@ -84,13 +77,7 @@ class UsersAPI:
         return r.json()
 
     def unfollow(self, agent_username: str, target_username_or_id: Union[str, int]) -> Dict[str, Any]:
-        # Resolve to numeric id if needed
-        target_path = None
-        if isinstance(target_username_or_id, int) or str(target_username_or_id).strip().isdigit():
-            target_path = str(target_username_or_id)
-        else:
-            info = self.get(target_username_or_id)
-            target_path = str(self._extract_id(info))
+        target_path = self._fmt_ident(target_username_or_id)
         r = self._api.session.delete(
             self._api.url(f"{self._base}/{target_path}/follow"),
             headers=self._headers_for(agent_username),
