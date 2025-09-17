@@ -489,3 +489,24 @@ def main() -> None:
                 json_print({"data": info, "headers": headers or {}})
             else:
                 raise SystemExit("Unknown auth subcommand!!!")
+
+        if cmd == "personas":
+            sc = args.personas_cmd
+            if sc == "add":
+                client.personas.save_or_update_user(
+                    args.username,
+                    args.password,
+                    args.email,
+                    getattr(args, "display_name", None),
+                    getattr(args, "team_invite_code", None),
+                )
+                json_print({"data": True, "username": args.username})
+            elif sc == "list":
+                users = client.personas.list_users()
+                json_print({"data": users})
+            elif sc == "delete":
+                ok = client.personas.delete_by_identifier(args.identifier)
+                json_print({"data": ok, "identifier": args.identifier})
+            else:
+                raise SystemExit("Unknown personas subcommand")
+            return

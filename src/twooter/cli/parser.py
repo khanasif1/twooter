@@ -218,6 +218,23 @@ def parse_args() -> argparse.Namespace:
     au_sub = au.add_subparsers(dest="auth_cmd", required=True)
     auc = au_sub.add_parser("change-password")
     add_agent(auc)
+
+    # epic new personas DB management command/sub
+    pe = sub.add_parser(
+        "personas",
+        description=(
+            "Manage local personas.db entries (no network)."
+        ),)
+    pe_sub = pe.add_subparsers(dest="personas_cmd", required=True)
+    pea = pe_sub.add_parser("add")
+    pea.add_argument("--username", required=True)
+    pea.add_argument("--password", required=True)
+    pea.add_argument("--email", required=True)
+    pea.add_argument("--display-name")
+    pea.add_argument("--team-invite-code")
+    pel = pe_sub.add_parser("list")
+    ped = pe_sub.add_parser("delete")
+    ped.add_argument("identifier", help="username or email")
     auc.add_argument("--new-password", required=True)
     aul = au_sub.add_parser("logout")
     add_agent(aul)

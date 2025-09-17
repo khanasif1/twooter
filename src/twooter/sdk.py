@@ -351,6 +351,22 @@ class Twooter:
                         student: bool, age18: bool,) -> Dict[str, Any]:
         return self._client.competition.verify_post(name, email, token, consent, student, age18)
 
+    # ---------- personas.db management ----------
+
+    def personas_add_user(self, username: str, password: str, email: str,
+                          display_name: Optional[str] = None,
+                          team_invite_code: Optional[str] = None) -> Dict[str, Any]:
+        self._client.personas.save_or_update_user(username, password, email, display_name, team_invite_code)
+        return {"data": True, "username": username}
+
+    def personas_list_users(self) -> Dict[str, Any]:
+        users = self._client.personas.list_users()
+        return {"data": users}
+
+    def personas_delete_user(self, identifier: str) -> Dict[str, Any]:
+        ok = self._client.personas.delete_by_identifier(identifier)
+        return {"data": ok, "identifier": identifier}
+
     # ---------- internals ----------
 
     def _need_agent(self) -> str:

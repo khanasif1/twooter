@@ -254,6 +254,43 @@ class PersonasDB:
         finally:
             conn.close()
 
+    def list_users(self) -> list[dict[str, Any]]:
+        """Return all users with available columns.
+        Columns returned when present: username, email, display_name, team_invite_code, created_at.
+        Shouldn't need more lol
+        """
+        self.ensure_minimal_schema(reset_if_incompatible=True)
+        conn = sqlite3.connect(self.path)
+        try:
+            wanted = ("username", "email", "display_name", "team_invite_code", "created_at")
+            present = self._table_has_columns(conn, "users", wanted)
+            cols = [c for c in wanted if present.get(c)]
+            if not cols:
+                return []
+            cur = conn.cursor()
+            cur.execute(f"SELECT {', '.join(cols)} FROM users ORDER BY rowid ASC")
+            rows = cur.fetchall()
+            return [dict(zip(cols, row)) for row in rows]
+        finally:
+            conn.close()
+
+    def delete_by_identifier(self, ident: str) -> bool:
+        """Delete a user by username or email. Returns True if a row was deleted."""
+        self.ensure_minimal_schema(reset_if_incompatible=True)
+        conn = sqlite3.connect(self.path)
+        try:
+            cur = conn.cursor()
+            # Try username first, then email
+            cur.execute("DELETE FROM users WHERE username = ?", (ident,))
+            n = cur.rowcount or 0
+            if n == 0:
+                cur.execute("DELETE FROM users WHERE email = ?", (ident,))
+                n = cur.rowcount or 0
+            conn.commit()
+            return n > 0
+        finally:
+            conn.close()
+
     def count_users(self) -> int:
         conn = sqlite3.connect(self.path)
         try:
