@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 #pip install google-genai
 #pip install openai
+#pip install dotenv
 
 load_dotenv()
 PASS = os.getenv("TWOOTER_PASS")
