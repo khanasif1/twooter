@@ -11,8 +11,6 @@ class TwooterOptions:
     personas_db: Optional[str] = None
     tokens_db: Optional[str] = None
     teams_db: Optional[str] = None
-    caddy_user: Optional[str] = None
-    caddy_pass: Optional[str] = None
     login_path: str = "/auth/login"
     register_path: str = "/auth/register"
     competition_bot_key: Optional[str] = None
@@ -29,8 +27,6 @@ class TwooterOptions:
             personas_db=cfg.personas_db,
             tokens_db=cfg.tokens_db,
             teams_db=cfg.teams_db,
-            caddy_user=cfg.caddy_user,
-            caddy_pass=cfg.caddy_pass,
             competition_bot_key=cfg.competition_bot_key,
             team_invite_code=cfg.team_invite_code,
             debug=dbg,
@@ -47,8 +43,6 @@ class Twooter:
             personas_db=opts.personas_db,
             tokens_db=opts.tokens_db,
             teams_db=opts.teams_db,
-            caddy_user=opts.caddy_user,
-            caddy_pass=opts.caddy_pass,
             login_path=opts.login_path,
             register_path=opts.register_path,
             default_invite=opts.team_invite_code,
@@ -378,7 +372,6 @@ class Twooter:
 def new(*, base_url: Optional[str] = None, debug: Optional[bool] = None,
             use_env: bool = True, personas_db: Optional[str] = None,
             tokens_db: Optional[str] = None, teams_db: Optional[str] = None,
-            caddy_user: Optional[str] = None, caddy_pass: Optional[str] = None,
             bot_key: Optional[str] = None, team_invite: Optional[str] = None,
         )-> Twooter:
     if use_env:
@@ -386,8 +379,6 @@ def new(*, base_url: Optional[str] = None, debug: Optional[bool] = None,
         if personas_db: options.personas_db = personas_db
         if tokens_db: options.tokens_db = tokens_db
         if teams_db: options.teams_db = teams_db
-        if caddy_user is not None: options.caddy_user = caddy_user
-        if caddy_pass is not None: options.caddy_pass = caddy_pass
         if bot_key is not None: options.competition_bot_key = bot_key
         if team_invite is not None:options.team_invite_code = team_invite
     else:
@@ -398,8 +389,6 @@ def new(*, base_url: Optional[str] = None, debug: Optional[bool] = None,
             personas_db=personas_db,
             tokens_db=tokens_db,
             teams_db=teams_db,
-            caddy_user=caddy_user,
-            caddy_pass=caddy_pass,
             competition_bot_key=bot_key,
             team_invite_code=team_invite,
             debug=bool(debug),

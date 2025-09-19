@@ -22,8 +22,6 @@ def main() -> None:
         cfg.personas_db,
         cfg.tokens_db,
         cfg.teams_db,
-        cfg.caddy_user,
-        cfg.caddy_pass,
         cfg.login_path,
         cfg.register_path,
         cfg.team_invite_code,

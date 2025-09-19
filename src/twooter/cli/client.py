@@ -20,8 +20,6 @@ class TwooterClient:
         personas_db: str,
         tokens_db: str,
         teams_db: str,
-        caddy_user: Optional[str],
-        caddy_pass: Optional[str],
         login_path: str,
         register_path: str,
         default_invite: Optional[str],
@@ -30,7 +28,7 @@ class TwooterClient:
         debug: bool = False,
     ) -> None:
         self.debug = debug
-        self.api = ApiSession(base_url, caddy_user, caddy_pass, debug=debug)
+        self.api = ApiSession(base_url, debug=debug)
         self.personas = PersonasDB(personas_db)
         self.tokens = TokenStore(tokens_db)
         self.default_invite = default_invite
@@ -354,4 +352,3 @@ class TwooterClient:
 
     def agent(self, username: str) -> Agent:
         return Agent(username, self.twoots, self.users, self.notifications)
-

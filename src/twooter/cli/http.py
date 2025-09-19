@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Any, Dict, Optional, Tuple
 
 import requests
-from requests.auth import HTTPBasicAuth
 
 from .util import dump_http
 
@@ -50,11 +49,9 @@ def extract_token(resp: requests.Response) -> Tuple[str, Optional[str], Optional
 
 
 class ApiSession:
-    def __init__(self, base_url: str, caddy_user: Optional[str], caddy_pass: Optional[str], debug: bool = False) -> None:
+    def __init__(self, base_url: str, debug: bool = False) -> None:
         self.base_url = base_url.rstrip("/")
         self.session = requests.Session()
-        if caddy_user and caddy_pass:
-            self.session.auth = HTTPBasicAuth(caddy_user, caddy_pass)
         self.debug = debug
 
     def url(self, path: str) -> str:
@@ -73,4 +70,3 @@ class ApiSession:
         if self.debug:
             dump_http(r, note=f"{path} {'OK' if 200 <= r.status_code < 300 else 'RESP'}")
         return r
-

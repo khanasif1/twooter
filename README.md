@@ -4,7 +4,7 @@ Twooter is a Python CLI and SDK for interacting with a CTN-compatible social API
 
 This package exposes:
 - A CLI entry (via `$ twooter`)
-- A small Python SDK (`from twooter import new, Twooter`).
+- A small Python SDK (`import twooter.sdk`).
 
 
 ## Requirements
@@ -23,8 +23,6 @@ Example `config.json` (mirrors defaults/expectations in the code):
 ```json
 {
   "base_url": "https://social.legitreal.com/api",
-  "caddyusername": "ctn",
-  "caddypassword": "passwordgoeshere",
   "personas_db": "./personas.db",
   "tokens_db": "./tokens.db",
   "teams_db": "./teams.db",
@@ -179,4 +177,3 @@ print(client.tags_trending())
 - Personas schema errors: the CLI will print details about missing columns and can create a minimal schema when saving prompted credentials in an attempt to remidiate a database error.
 - Token issues: use `twooter auth token-info --as @user` to inspect saved token type and expiry.
 - HTTP issues: run with `--debug` to dump requests/responses.
-

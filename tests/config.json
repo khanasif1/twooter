@@ -1,7 +1,5 @@
 {
   "base_url": "https://social.legitreal.com/api",
-  "caddyusername": "ctn",
-  "caddypassword": "verysecure",
   "personas_db": "./personas.db",
   "tokens_db": "./tokens.db",
   "teams_db": "./teams.db",

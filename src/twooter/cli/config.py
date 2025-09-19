@@ -35,8 +35,6 @@ class Config:
         if not self.config_path or not Path(self.config_path).is_file():
             example = {
                 "base_url": "https://social.legitreal.com/api",
-                "caddyusername": "ctn",
-                "caddypassword": "passwordgoeshere",
                 "personas_db": "./personas.db",
                 "tokens_db": "./tokens.db",
                 "teams_db": "./teams.db",
@@ -62,8 +60,6 @@ class Config:
         self.tokens_db = resolve_db_path(data.get("tokens_db"), "tokens.db", base_dir, prefer_state=True)
         self.teams_db = resolve_db_path(data.get("teams_db"), "teams.db", base_dir)
 
-        self.caddy_user = data.get("caddyusername")
-        self.caddy_pass = data.get("caddypassword")
         self.competition_bot_key = data.get("competition_bot_key")
         self.team_invite_code = data.get("team_invite_code")
 
@@ -84,4 +80,3 @@ class Config:
         if xdg_cfg.is_file():
             return str(xdg_cfg)
         return None
-
