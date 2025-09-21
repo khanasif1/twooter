@@ -1,8 +1,0 @@
-{
-  "base_url": "https://social.legitreal.com/api",
-  "personas_db": "./personas.db",
-  "tokens_db": "./tokens.db",
-  "teams_db": "./teams.db",
-  "competition_bot_key": " ",
-  "team_invite_code": "Invite_code_goes_here"
-}

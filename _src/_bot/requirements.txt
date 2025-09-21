@@ -1,0 +1,11 @@
+# Twooter Team Bot Requirements
+# 
+# All database operations use SQLite which is built into Python 3.7+
+# No additional database packages needed!
+
+requests>=2.31.0
+
+# Optional packages for enhanced functionality:
+# colorama>=0.4.0      # For colored console output
+# schedule>=1.2.0      # For advanced scheduling features  
+# python-dotenv>=1.0.0 # For .env file support
