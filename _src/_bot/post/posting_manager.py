@@ -537,3 +537,220 @@ class PostingManager:
                 
         except requests.RequestException as e:
             raise Exception(f"Network error getting posts for user {username}: {e}")
+    
+    def get_trending_posts(self, limit: int = 20) -> Dict[str, Any]:
+        """
+        Get trending posts from the platform.
+        
+        This method retrieves the most popular/trending posts currently on the platform.
+        These are typically posts with high engagement (likes, reposts, replies).
+        
+        Args:
+            limit (int): Maximum number of trending posts to return (default: 20)
+            
+        Returns:
+            Dict[str, Any]: Response containing trending posts data with:
+                - data: List of trending post objects
+                - count: Number of posts returned
+                - feed_type: "trending"
+                
+        Raises:
+            Exception: If API call fails or authentication is required
+            
+        Example:
+            trending = bot.get_trending_posts(limit=10)
+            for post in trending.get('data', []):
+                print(f"📈 {post['content'][:100]}...")
+        """
+        trending_url = f"{self.base_url}/feeds/trending"
+        
+        params = {"limit": limit}
+        
+        try:
+            response = self.session.get(trending_url, params=params)
+            
+            if response.status_code == 200:
+                result = response.json()
+                post_count = len(result.get('data', []))
+                print(f"📈 Retrieved {post_count} trending posts")
+                
+                # Add metadata about the feed type
+                result['feed_type'] = 'trending'
+                return result
+            else:
+                error_msg = f"Failed to get trending posts: {response.status_code}"
+                try:
+                    error_detail = response.json()
+                    error_msg += f" - {error_detail}"
+                except:
+                    error_msg += f" - {response.text}"
+                raise Exception(error_msg)
+                
+        except requests.RequestException as e:
+            raise Exception(f"Network error getting trending posts: {e}")
+    
+    def get_latest_posts(self, limit: int = 20, at_iso: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Get latest posts from the platform.
+        
+        This method retrieves the most recent posts chronologically.
+        You can optionally specify a timestamp to get posts from a specific time.
+        
+        Args:
+            limit (int): Maximum number of latest posts to return (default: 20)
+            at_iso (Optional[str]): ISO timestamp to get posts from specific time
+            
+        Returns:
+            Dict[str, Any]: Response containing latest posts data with:
+                - data: List of latest post objects  
+                - count: Number of posts returned
+                - feed_type: "latest"
+                
+        Raises:
+            Exception: If API call fails or authentication is required
+            
+        Example:
+            # Get latest posts
+            latest = bot.get_latest_posts(limit=10)
+            
+            # Get posts from specific time
+            latest = bot.get_latest_posts(at_iso="2024-08-10T12:34:56")
+        """
+        latest_url = f"{self.base_url}/feeds/latest"
+        
+        params = {"limit": limit}
+        if at_iso:
+            params["at"] = at_iso
+        
+        try:
+            response = self.session.get(latest_url, params=params)
+            
+            if response.status_code == 200:
+                result = response.json()
+                post_count = len(result.get('data', []))
+                if at_iso:
+                    print(f"🕐 Retrieved {post_count} posts from {at_iso}")
+                else:
+                    print(f"🕐 Retrieved {post_count} latest posts")
+                
+                # Add metadata about the feed type
+                result['feed_type'] = 'latest'
+                return result
+            else:
+                error_msg = f"Failed to get latest posts: {response.status_code}"
+                try:
+                    error_detail = response.json()
+                    error_msg += f" - {error_detail}"
+                except:
+                    error_msg += f" - {response.text}"
+                raise Exception(error_msg)
+                
+        except requests.RequestException as e:
+            raise Exception(f"Network error getting latest posts: {e}")
+    
+    def get_home_feed(self, limit: int = 20) -> Dict[str, Any]:
+        """
+        Get personalized home feed.
+        
+        This method retrieves the user's personalized home feed, which typically
+        includes posts from users they follow and other relevant content.
+        Requires authentication.
+        
+        Args:
+            limit (int): Maximum number of posts to return (default: 20)
+            
+        Returns:
+            Dict[str, Any]: Response containing home feed data with:
+                - data: List of personalized post objects
+                - count: Number of posts returned 
+                - feed_type: "home"
+                
+        Raises:
+            Exception: If not authenticated or API call fails
+            
+        Example:
+            home_feed = bot.get_home_feed(limit=15)
+            for post in home_feed.get('data', []):
+                print(f"🏠 {post['author']['username']}: {post['content'][:50]}...")
+        """
+        if not self.auth_manager.is_authenticated():
+            raise Exception("❌ Authentication required for home feed")
+        
+        home_url = f"{self.base_url}/feeds/home"
+        
+        params = {"limit": limit}
+        
+        try:
+            response = self.session.get(home_url, params=params)
+            
+            if response.status_code == 200:
+                result = response.json()
+                post_count = len(result.get('data', []))
+                print(f"🏠 Retrieved {post_count} posts from home feed")
+                
+                # Add metadata about the feed type
+                result['feed_type'] = 'home'
+                return result
+            else:
+                error_msg = f"Failed to get home feed: {response.status_code}"
+                try:
+                    error_detail = response.json()
+                    error_msg += f" - {error_detail}"
+                except:
+                    error_msg += f" - {response.text}"
+                raise Exception(error_msg)
+                
+        except requests.RequestException as e:
+            raise Exception(f"Network error getting home feed: {e}")
+    
+    def get_explore_feed(self, limit: int = 20) -> Dict[str, Any]:
+        """
+        Get explore/discovery feed.
+        
+        This method retrieves the explore feed, which typically contains
+        content for discovery - popular posts from users you don't follow,
+        trending topics, etc. May require authentication.
+        
+        Args:
+            limit (int): Maximum number of posts to return (default: 20)
+            
+        Returns:
+            Dict[str, Any]: Response containing explore feed data with:
+                - data: List of discovery post objects
+                - count: Number of posts returned
+                - feed_type: "explore"
+                
+        Raises:
+            Exception: If API call fails or authentication is required
+            
+        Example:
+            explore = bot.get_explore_feed(limit=10)
+            for post in explore.get('data', []):
+                print(f"🔍 {post['content'][:80]}...")
+        """
+        explore_url = f"{self.base_url}/feeds/explore"
+        
+        params = {"limit": limit}
+        
+        try:
+            response = self.session.get(explore_url, params=params)
+            
+            if response.status_code == 200:
+                result = response.json()
+                post_count = len(result.get('data', []))
+                print(f"🔍 Retrieved {post_count} posts from explore feed")
+                
+                # Add metadata about the feed type
+                result['feed_type'] = 'explore'
+                return result
+            else:
+                error_msg = f"Failed to get explore feed: {response.status_code}"
+                try:
+                    error_detail = response.json()
+                    error_msg += f" - {error_detail}"
+                except:
+                    error_msg += f" - {response.text}"
+                raise Exception(error_msg)
+                
+        except requests.RequestException as e:
+            raise Exception(f"Network error getting explore feed: {e}")

@@ -1,0 +1,776 @@
+{
+  "scraping_metadata": {
+    "timestamp": "2025-09-21T21:01:55.655923",
+    "base_url": "https://victor-for-president.legitreal.com",
+    "total_pages_scraped": 4,
+    "total_articles_extracted": 15,
+    "scraper_version": "simple_requests",
+    "completion_time": "2025-09-21T21:02:09.282948"
+  },
+  "main_pages": [
+    {
+      "url": "https://victor-for-president.legitreal.com/index.html",
+      "title": "Build a Better Kingston",
+      "description": "A fictional campaign website created for the Capture the Narrative competition at https://capturethenarrative.com.",
+      "scraped_at": "2025-09-21T21:01:56.754013",
+      "article_links": [
+        "https://victor-for-president.legitreal.com/page2",
+        "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-our-future-protecting-our-heritage/",
+        "https://victor-for-president.legitreal.com/page3",
+        "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-people-protecting-our-future/",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-protecting-kingstons-future-a-vision-for-prosperity-and-sustainability/",
+        "https://victor-for-president.legitreal.com/post/2025-09-21-a-future-for-all-kingston-deserves-bold-leadership/",
+        "https://victor-for-president.legitreal.com/authors-list.html",
+        "https://victor-for-president.legitreal.com/post/2025-09-21-beyond-division-a-vision-for-a-united-kingston/",
+        "https://victor-for-president.legitreal.com/policies"
+      ],
+      "status_code": 200,
+      "article_previews": [
+        {
+          "title": "Build a Better Kingston",
+          "summary": "Build a Better KingstonA future of fairness, opportunity, and sustainability for all Kingstonians.Read More",
+          "link": "https://victor-for-president.legitreal.com/policies"
+        },
+        {
+          "title": "Beyond Division- A Vision for a United Kingston",
+          "summary": "Beyond Division- A Vision for a United KingstonFor too long, Kingston has been fractured by division. We’ve allowed ideological battles to overshadow our common humanity and prevent us from tackling the real challenges facing our nation. But I believe we can build a better future – a future rooted i...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-21-beyond-division-a-vision-for-a-united-kingston/"
+        },
+        {
+          "title": "A Kingston For All- Investing in People, Protecting Our Future",
+          "summary": "A Kingston For All- Investing in People, Protecting Our FutureFor too long, Kingston has been held back by short-sighted policies that prioritize the wealthy and powerful over the needs of ordinary families. As I’ve travelled the islands, listening to the concerns of fishermen, families and students...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-people-protecting-our-future/"
+        },
+        {
+          "title": "A Kingston For All- Investing in Our Future, Protecting Our Heritage",
+          "summary": "A Kingston For All- Investing in Our Future, Protecting Our HeritageFor too long, Kingston has been at a crossroads. We can continue down a path of short-term gains and environmental neglect, or we can choose a future rooted in fairness, sustainability, and opportunity for all. As your candidate for...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-our-future-protecting-our-heritage/"
+        },
+        {
+          "title": "A Future For All- Kingston Deserves Bold Leadership",
+          "summary": "A Future For All- Kingston Deserves Bold LeadershipFor too long, Kingston has been held back by short-sighted policies and a lack of vision. We’ve seen it time and time again – decisions made that prioritize profit over people, and leave vulnerable communities to bear the brunt. The recent announcem...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-21-a-future-for-all-kingston-deserves-bold-leadership/"
+        },
+        {
+          "title": "Protecting Kingston's Future- A Vision for Prosperity and Sustainability",
+          "summary": "Protecting Kingston's Future- A Vision for Prosperity and SustainabilityFor too long, Kingston has been presented with a false choice: economic prosperity or environmental sustainability. The truth is, these two goals are inextricably linked. A healthy environment is the foundation of a thriving eco...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-protecting-kingstons-future-a-vision-for-prosperity-and-sustainability/"
+        }
+      ]
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/policies.html",
+      "title": "Policies | Victor for President",
+      "description": "This is a fictional news website created for the Capture the Narrative competition https://capturethenarrative.com.",
+      "scraped_at": "2025-09-21T21:01:57.786444",
+      "article_links": [
+        "https://victor-for-president.legitreal.com/authors-list.html"
+      ],
+      "status_code": 200,
+      "article_previews": []
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/page2/",
+      "title": "Victor for President [Fake Campaign Website] | Victor for President",
+      "description": "A fictional campaign website created for the Capture the Narrative competition at https://capturethenarrative.com.",
+      "scraped_at": "2025-09-21T21:01:58.828569",
+      "article_links": [
+        "https://victor-for-president.legitreal.com/page3",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-kingston-a-vision-for-all-of-kingston/",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-the-smears-a-vision-for-a-fairer-kingston/",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-a-vision-rooted-in-action/",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-building-a-kingston-where-everyone-thrives/",
+        "https://victor-for-president.legitreal.com/authors-list.html",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-soundbites-a-vision-for-a-just-and-sustainable-kingston/"
+      ],
+      "status_code": 200,
+      "article_previews": [
+        {
+          "title": "Beyond the Smears- A Vision for a Fairer Kingston",
+          "summary": "Beyond the Smears- A Vision for a Fairer KingstonKingston stands at a crossroads. We can succumb to the politics of division and distraction, or we can choose a path of progress, fairness, and opportunity for all. In recent days, we’ve seen attempts to derail this campaign with baseless accusations ...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-the-smears-a-vision-for-a-fairer-kingston/"
+        },
+        {
+          "title": "Beyond Soundbites- A Vision for a Just and Sustainable Kingston",
+          "summary": "Beyond Soundbites- A Vision for a Just and Sustainable KingstonFor weeks, I’ve been travelling across Kingston, listening to the concerns of our communities. I’ve heard the anxieties about rising costs, the frustrations with stagnant wages, and the growing fear for our planet’s future. What I’ve als...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-soundbites-a-vision-for-a-just-and-sustainable-kingston/"
+        },
+        {
+          "title": "Beyond Promises- Building a Kingston Where Everyone Thrives",
+          "summary": "Beyond Promises- Building a Kingston Where Everyone ThrivesFor too long, Kingston has been promised change, only to see the same old problems persist. I’m not here to offer more empty promises, but a fundamental shift in how we approach governance – a commitment to building a Kingston where everyone...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-building-a-kingston-where-everyone-thrives/"
+        },
+        {
+          "title": "Beyond Promises- A Vision Rooted in Action",
+          "summary": "Beyond Promises- A Vision Rooted in ActionFor too long, Kingston has been promised change without seeing real progress. I’m not here to offer more empty promises. I’m here to offer a vision rooted in action – a vision built on years of commitment to the values that matter most to the people of this ...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-a-vision-rooted-in-action/"
+        },
+        {
+          "title": "Beyond Kingston- A Vision for All of Kingston",
+          "summary": "Beyond Kingston- A Vision for All of KingstonFor too long, Kingston has been a nation of contrasts – a glittering capital city alongside communities struggling to make ends meet. As I travel across our islands, listening to the concerns of families and workers, it’s become clear that we need a new d...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-kingston-a-vision-for-all-of-kingston/"
+        }
+      ]
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/page3/",
+      "title": "Victor for President [Fake Campaign Website] | Victor for President",
+      "description": "A fictional campaign website created for the Capture the Narrative competition at https://capturethenarrative.com.",
+      "scraped_at": "2025-09-21T21:01:59.872264",
+      "article_links": [
+        "https://victor-for-president.legitreal.com/authors-list.html",
+        "https://victor-for-president.legitreal.com/post/2025-08-20-a-kingston-for-all-investing-in-people-protecting-our-future/",
+        "https://victor-for-president.legitreal.com/page2",
+        "https://victor-for-president.legitreal.com/post/2025-09-20-a-kingston-for-all-investing-in-people-protecting-our-future/"
+      ],
+      "status_code": 200,
+      "article_previews": [
+        {
+          "title": "A Kingston For All- Investing in People, Protecting Our Future",
+          "summary": "A Kingston For All- Investing in People, Protecting Our FutureFor too long, Kingston has been held back by short-sighted policies and a lack of vision. It’s time for a change. It’s time for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our eco...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-09-20-a-kingston-for-all-investing-in-people-protecting-our-future/"
+        },
+        {
+          "title": "A Kingston For All- Investing in People, Protecting Our Future",
+          "summary": "A Kingston For All- Investing in People, Protecting Our FutureFor too long, Kingston has been a nation of stark contrasts. Breathtaking beauty alongside growing inequality. Vibrant culture shadowed by economic insecurity. I, Victor Hawthorne, believe we can – and must – build a Kingston where everyo...",
+          "link": "https://victor-for-president.legitreal.com/post/2025-08-20-a-kingston-for-all-investing-in-people-protecting-our-future/"
+        }
+      ]
+    }
+  ],
+  "news_articles": [
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-a-vision-rooted-in-action/",
+      "title": "Beyond Promises- A Vision Rooted in Action",
+      "content": "For too long, Kingston has been promised change without seeing real progress. I’m not here to offer more empty promises. I’m here to offer a vision rooted in action – a vision built on years of commitment to the values that matter most to the people of this nation.\nMy commitment isn’t a recent development. It’s been evident in every step of my journey, from advocating for affordable housing to demanding economic fairness. As I’ve consistently stated, ‘Sky-high rents & stagnant wages in Kingston City aren’t accidents. They’re the result of choices.’ This isn’t just rhetoric; it’s a fundamental belief that drives my policy proposals.\nMy platform isn’t simply a collection of ideas; it’s a roadmap to a more just and sustainable future. We will invest in our people through free tertiary education and expanded vocational grants, funded by a progressive tax system that ensures everyone contributes their fair share. We will protect our future by taking aggressive action on climate change, transitioning to a green economy, and ending harmful practices like offshore drilling. And we will build a fair economy by strengthening worker protections, supporting renters’ rights, and curbing wealth inequality.\nBut my vision extends beyond economics and the environment. I believe in a society where everyone is treated with dignity and respect. That’s why I’m committed to reforming our policing and justice system, ensuring civilian oversight, demilitarizing our streets, and reinvesting in community programs. I will champion human rights, ensuring full legal equality for all, robust anti-discrimination enforcement, and universal access to reproductive healthcare.\nSome may call this a progressive agenda. I call it common sense. It’s time for Kingston to move beyond empty promises and embrace a future built on action, fairness, and opportunity for all. Join me, and let’s build that future together.",
+      "summary": "For too long, Kingston has been promised change without seeing real progress. I’m not here to offer more empty promises. I’m here to offer a vision rooted in action – a vision built on years of commitment to the values that matter most to the people of this nation.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/housing_under_construction.jpg",
+          "alt": "Beyond Promises- A Vision Rooted in Action",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/youths_playing_football_soccer.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:04.853076",
+      "status_code": 200,
+      "word_count": 297
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-21-a-future-for-all-kingston-deserves-bold-leadership/",
+      "title": "A Future For All- Kingston Deserves Bold Leadership",
+      "content": "For too long, Kingston has been held back by short-sighted policies and a lack of vision. We’ve seen it time and time again – decisions made that prioritize profit over people, and leave vulnerable communities to bear the brunt. The recent announcement of the snapper quota is a stark reminder of this reality. As Laverne Huerta rightly pointed out, this isn’t just about fisheries – it’s about the broader economic impact on coastal livelihoods.\nI’ve spent the last weeks listening to the concerns of fishermen, families, and community leaders. They’re not asking for handouts – they’re asking for a fair chance. They’re asking for leaders who understand the connection between a healthy environment and a thriving economy. And they’re tired of false choices.\nSome will tell you that protecting our environment comes at the expense of economic growth. They’ll claim that investing in people is too expensive. But I say, what is the cost of inaction? What is the cost of allowing our fisheries to collapse? What is the cost of leaving generations of young people without access to education and opportunity?\nMy vision for Kingston is rooted in fairness and opportunity for all. It’s a vision that prioritizes investment in people, through free tertiary education and expanded vocational grants, funded through progressive taxation. It’s a vision that recognizes the urgent need for aggressive action on climate change, through carbon taxes and green public works. And it’s a vision that builds a fair economy, strengthens worker protections, and curbs wealth inequality.\nI’m not offering empty promises or quick fixes. I’m offering a bold, progressive agenda that addresses the root causes of the challenges facing our nation. I’m offering a future where everyone has the opportunity to thrive.\nIt’s time for bold leadership. It’s time for a future for all. Join me in building a Kingston we can all be proud of.",
+      "summary": "For too long, Kingston has been held back by short-sighted policies and a lack of vision. We’ve seen it time and time again – decisions made that prioritize profit over people, and leave vulnerable communities to bear the brunt. The recent announcement of the snapper quota is a stark reminder of this reality. As Laverne Huerta rightly pointed out, this isn’t just about fisheries – it’s about the broader economic impact on coastal livelihoods.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/fishing_ships_at_port.jpg",
+          "alt": "A Future For All- Kingston Deserves Bold Leadership",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/kingston_regatta_sailing_boats.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:05.406403",
+      "status_code": 200,
+      "word_count": 311
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/authors-list.html",
+      "title": "Staffers | Victor for President",
+      "content": "Staffers\nVictor Hawthorne\n(View Posts)\nVictor Hawthorne: A fiery and resolute voice for the people of Kingston. As a senior Member of Parliament and champion of the People’s Alliance, he’s fighting for a more equitable future with bold action on climate, healthcare, and workers’ rights.",
+      "summary": "Victor Hawthorne: A fiery and resolute voice for the people of Kingston. As a senior Member of Parliament and champion of the People’s Alliance, he’s fighting for a more equitable future with bold action on climate, healthcare, and workers’ rights.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "80",
+          "height": "80"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:06.508258",
+      "status_code": 200,
+      "word_count": 45
+    }
+  ],
+  "press_releases": [
+    {
+      "url": "https://victor-for-president.legitreal.com/page2",
+      "title": "Victor for President [Fake Campaign Website] | Victor for President",
+      "content": "News and Press Releases\nBeyond the Smears- A Vision for a Fairer Kingston\nKingston stands at a crossroads. We can succumb to the politics of division and distraction, or we can choose a path of progress, fairness, and opportunity for all. In recent days, we’ve seen attempts to derail this campaign with baseless accusations – attempts to distract from the real issues fa...\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\nBeyond Soundbites- A Vision for a Just and Sustainable Kingston\nFor weeks, I’ve been travelling across Kingston, listening to the concerns of our communities. I’ve heard the anxieties about rising costs, the frustrations with stagnant wages, and the growing fear for our planet’s future. What I’ve also observed is a disturbing trend in this election: a relianc...\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\nBeyond Promises- Building a Kingston Where Everyone Thrives\nFor too long, Kingston has been promised change, only to see the same old problems persist. I’m not here to offer more empty promises, but a fundamental shift in how we approach governance – a commitment to building a Kingston where everyone has the opportunity to thrive.\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\nBeyond Promises- A Vision Rooted in Action\nFor too long, Kingston has been promised change without seeing real progress. I’m not here to offer more empty promises. I’m here to offer a vision rooted in action – a vision built on years of commitment to the values that matter most to the people of this nation.\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\nBeyond Kingston- A Vision for All of Kingston\nFor too long, Kingston has been a nation of contrasts – a glittering capital city alongside communities struggling to make ends meet. As I travel across our islands, listening to the concerns of families and workers, it’s become clear that we need a new direction – a vision that prioritizes fairn...\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\n«\n                            Prev\n1\n2\n3\nNext\n                            »",
+      "summary": "Kingston stands at a crossroads. We can succumb to the politics of division and distraction, or we can choose a path of progress, fairness, and opportunity for all. In recent days, we’ve seen attempts to derail this campaign with baseless accusations – attempts to distract from the real issues fa...",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [],
+      "scraped_at": "2025-09-21T21:02:00.951384",
+      "status_code": 200,
+      "word_count": 352
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-our-future-protecting-our-heritage/",
+      "title": "A Kingston For All- Investing in Our Future, Protecting Our Heritage",
+      "content": "For too long, Kingston has been at a crossroads. We can continue down a path of short-term gains and environmental neglect, or we can choose a future rooted in fairness, sustainability, and opportunity for all. As your candidate for President, I believe the choice is clear.\nMy commitment isn’t just about grand promises; it’s about listening to the concerns of Kingstonians and translating them into concrete action. I’ve been deeply moved by the conversations surrounding our precious marine environment. The urgency is real. As one citizen aptly stated, “Salt & Steam reigns supreme at Kingston’s Best Coffee!” – a beautiful reminder of the island life we must protect. But we can’t enjoy these treasures if we fail to address the growing threat to our reefs. As another citizen rightly pointed out, the situation is urgent: “Reef alert! Bleaching worsens as tax cuts loom.” We need to ensure that tourism doesn’t come at the cost of our natural heritage.\nThat’s why my administration will prioritize aggressive action on climate change, investing in green public works and ending offshore drilling. But sustainability isn’t just about the environment; it’s about preserving our cultural heritage too. We must ensure that the vibrancy of events like Regatta Week – a celebration of our maritime traditions – isn’t jeopardized by environmental degradation.\nMy vision extends beyond environmental protection. I believe in investing in people – expanding access to free tertiary education and vocational grants, funded through progressive taxation. I’m committed to building a fairer economy – strengthening worker protections, supporting renters’ rights, and curbing wealth inequality. And I’m dedicated to reforming our policing and justice system – promoting civilian oversight, demilitarization, and reinvestment in community programs.\nThis isn’t just a campaign; it’s a movement. It’s a call for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our cultural heritage is celebrated. Join me in building a Kingston for all.",
+      "summary": "For too long, Kingston has been at a crossroads. We can continue down a path of short-term gains and environmental neglect, or we can choose a future rooted in fairness, sustainability, and opportunity for all. As your candidate for President, I believe the choice is clear.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/kingston_regatta_sailing_boats.jpg",
+          "alt": "A Kingston For All- Investing in Our Future, Protecting Our Heritage",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/fishing_ships_at_port.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:01.511997",
+      "status_code": 200,
+      "word_count": 321
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/page3",
+      "title": "Victor for President [Fake Campaign Website] | Victor for President",
+      "content": "News and Press Releases\nA Kingston For All- Investing in People, Protecting Our Future\nFor too long, Kingston has been held back by short-sighted policies and a lack of vision. It’s time for a change. It’s time for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy works for all, not just a select few.\nIn\nPolitics\n,\nEconomy\n,\nSocial Justice\n,\nSep 20, 2025\nA Kingston For All- Investing in People, Protecting Our Future\nFor too long, Kingston has been a nation of stark contrasts. Breathtaking beauty alongside growing inequality. Vibrant culture shadowed by economic insecurity. I, Victor Hawthorne, believe we can – and must – build a Kingston where everyone has the opportunity to thrive.\nIn\nPolitics\n,\nEconomy\n,\nSocial Issues\n,\nAug 20, 2025\n«\n                            Prev\n1\n2\n3\n»",
+      "summary": "For too long, Kingston has been held back by short-sighted policies and a lack of vision. It’s time for a change. It’s time for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy works for all, not just a select few.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [],
+      "scraped_at": "2025-09-21T21:02:02.086886",
+      "status_code": 200,
+      "word_count": 144
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-21-a-kingston-for-all-investing-in-people-protecting-our-future/",
+      "title": "A Kingston For All- Investing in People, Protecting Our Future",
+      "content": "For too long, Kingston has been held back by short-sighted policies that prioritize the wealthy and powerful over the needs of ordinary families. As I’ve travelled the islands, listening to the concerns of fishermen, families and students, one thing has become clear: Kingston deserves better.\nI recently saw a post online highlighting the struggle of our fishermen – a struggle mirrored in the lives of so many Kingstonians. As one commenter rightly pointed out, a beautiful Lantern Parade feels hollow when those who provide for us are struggling to make ends meet. That’s why my campaign isn’t just about lofty promises – it’s about concrete action to address the real challenges facing our communities.\nMy vision for Kingston is rooted in fairness and opportunity for all. We will unlock potential by making tertiary education free and expanding vocational grants, funded through a progressive tax system that ensures everyone contributes their fair share. We will protect our future by taking aggressive action on climate change, ending offshore drilling, and investing in green public works. And we will build a fair economy by strengthening worker protections, supporting renters’ rights, and curbing wealth inequality.\nThis isn’t just about economic policy – it’s about building a society where everyone has the opportunity to thrive. That’s why I’m committed to reforming policing and the justice system, championing human rights, and ensuring full legal equality for all.\nSome will say these policies are too ambitious, too costly. But I say, what is the cost of inaction? What is the cost of leaving entire communities behind? The time for incremental change is over. The time for bold, transformative leadership is now. Join me, and let’s build a Kingston where everyone has the opportunity to reach their full potential.",
+      "summary": "For too long, Kingston has been held back by short-sighted policies that prioritize the wealthy and powerful over the needs of ordinary families. As I’ve travelled the islands, listening to the concerns of fishermen, families and students, one thing has become clear: Kingston deserves better.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "A Kingston For All- Investing in People, Protecting Our Future",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/kingston_regatta_sailing_boats.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:02.641377",
+      "status_code": 200,
+      "word_count": 291
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-kingston-a-vision-for-all-of-kingston/",
+      "title": "Beyond Kingston- A Vision for All of Kingston",
+      "content": "For too long, Kingston has been a nation of contrasts – a glittering capital city alongside communities struggling to make ends meet. As I travel across our islands, listening to the concerns of families and workers, it’s become clear that we need a new direction – a vision that prioritizes fairness, opportunity, and sustainability for\nall\ncitizens.\nMy commitment isn’t just to speak\nto\nthe people, but to listen and learn from them. Recent conversations have reinforced the urgent need to address the economic disparities that divide our nation. As one voter recently pointed out, a thriving democracy isn’t just about grand promises; it’s about empowering citizens with the tools they need to succeed.\nThat’s why my campaign is built on a simple principle: investing in people. We will make tertiary education free, expanding access to opportunity for young people across Kingston. We’ll provide vocational grants, equipping workers with the skills they need to thrive in a changing economy. And we’ll fund these investments through a progressive tax system, ensuring that those who can afford to contribute more do so.\nBut our vision extends beyond economic opportunity. We face an existential threat in climate change, and we must act decisively. My administration will implement a carbon tax, invest in green public works, and end offshore drilling, protecting our environment for future generations.\nWe will also strengthen worker protections, support renters’ rights, and implement policies to curb wealth inequality, ensuring that everyone has a fair chance to succeed. And we will reform our policing and justice system, building trust and safety through civilian oversight, demilitarization, and reinvestment in community programs.\nThis isn’t just a campaign; it’s a movement. It’s a call for a more just, equitable, and sustainable future for all of Kingston. Join me, and together, we can build a nation where everyone has the opportunity to thrive.",
+      "summary": "For too long, Kingston has been a nation of contrasts – a glittering capital city alongside communities struggling to make ends meet. As I travel across our islands, listening to the concerns of families and workers, it’s become clear that we need a new direction – a vision that prioritizes fairness, opportunity, and sustainability forallcitizens.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "Beyond Kingston- A Vision for All of Kingston",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/housing_under_construction.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:03.199532",
+      "status_code": 200,
+      "word_count": 308
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-protecting-kingstons-future-a-vision-for-prosperity-and-sustainability/",
+      "title": "Protecting Kingston's Future- A Vision for Prosperity and Sustainability",
+      "content": "For too long, Kingston has been presented with a false choice: economic prosperity or environmental sustainability. The truth is, these two goals are inextricably linked. A healthy environment is the foundation of a thriving economy, and a prosperous society is essential for protecting our natural resources. As I’ve seen reflected in recent online conversations, some are deliberately framing environmental protection as a hindrance to growth—a dangerous narrative that puts our future at risk.\nI’ve witnessed attempts to connect sensible environmental policy with economic downturn, subtly implying that protecting our reefs somehow necessitates compromising our digital security. This is a blatant distortion. Kingston’s natural beauty\nis\nour economy. Our tourism industry, our fisheries, and our very way of life depend on a healthy environment.\nThat’s why my campaign is built on a vision for a prosperous and sustainable Kingston. We will invest in free tertiary education and expanded vocational grants, funded through progressive taxation, to unlock the potential of every Kingstonian. We will take aggressive action on climate change through carbon taxes, green public works, and an end to offshore drilling. We will strengthen worker protections, support renters’ rights, and implement policies to curb wealth inequality.\nThese aren’t just policy proposals; they’re investments in our future. They’re about creating a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy is resilient.\nI’m not offering empty promises or quick fixes. I’m offering a bold vision for a better Kingston, a vision rooted in fairness, sustainability, and opportunity for all. Join me in building a future we can all be proud of. Vote Victor Hawthorne for President.",
+      "summary": "For too long, Kingston has been presented with a false choice: economic prosperity or environmental sustainability. The truth is, these two goals are inextricably linked. A healthy environment is the foundation of a thriving economy, and a prosperous society is essential for protecting our natural resources. As I’ve seen reflected in recent online conversations, some are deliberately framing environmental protection as a hindrance to growth—a dangerous narrative that puts our future at risk.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "Protecting Kingston's Future- A Vision for Prosperity and Sustainability",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/fishing_ships_at_port.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:03.748355",
+      "status_code": 200,
+      "word_count": 272
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-the-smears-a-vision-for-a-fairer-kingston/",
+      "title": "Beyond the Smears- A Vision for a Fairer Kingston",
+      "content": "Kingston stands at a crossroads. We can succumb to the politics of division and distraction, or we can choose a path of progress, fairness, and opportunity for all. In recent days, we’ve seen attempts to derail this campaign with baseless accusations – attempts to distract from the real issues facing our nation. As I stated unequivocally, these attacks are nothing more than desperate tactics, and they will not deter me from fighting for the future Kingston deserves.\nMy vision isn’t built on empty promises; it’s rooted in concrete policies designed to uplift every citizen. We must invest in our people. That’s why I’m committed to free tertiary education and expanded vocational grants, funded through a progressive tax system. As one supporter succinctly put it online, ‘Who doesn’t want free uni?’ – it’s a question that speaks to the heart of our shared aspirations.\nBut a prosperous future demands more than just education. We must also safeguard our environment. Kingston’s natural beauty is a treasure we must protect. My plan calls for aggressive action on climate change through carbon taxes, green public works, and an end to offshore drilling. This isn’t just about preserving our planet; it’s about creating sustainable jobs and building a resilient economy.\nFor too long, wealth has been concentrated in the hands of a few, while working families struggle to make ends meet. It’s time to build a fairer economy – one that strengthens worker protections, supports renters’ rights, and curbs wealth inequality. We must also reform our policing and justice systems, ensuring accountability, transparency, and trust. Civilian oversight, demilitarization, and reinvestment in community programs are essential steps.\nMy commitment extends to championing human rights – ensuring full legal equality for all, robust anti-discrimination enforcement, and universal access to reproductive healthcare. This isn’t just about upholding fundamental values; it’s about creating a society where everyone has the opportunity to thrive.\nI’m not offering easy solutions, but I am offering a clear vision – a vision for a Kingston where fairness, opportunity, and sustainability are not just ideals, but realities. Join me in building that future. Let’s move beyond the smears and focus on what truly matters – the well-being of our nation and the promise of a brighter tomorrow.",
+      "summary": "Kingston stands at a crossroads. We can succumb to the politics of division and distraction, or we can choose a path of progress, fairness, and opportunity for all. In recent days, we’ve seen attempts to derail this campaign with baseless accusations – attempts to distract from the real issues facing our nation. As I stated unequivocally, these attacks are nothing more than desperate tactics, and they will not deter me from fighting for the future Kingston deserves.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "Beyond the Smears- A Vision for a Fairer Kingston",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:04.300606",
+      "status_code": 200,
+      "word_count": 372
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-promises-building-a-kingston-where-everyone-thrives/",
+      "title": "Beyond Promises- Building a Kingston Where Everyone Thrives",
+      "content": "For too long, Kingston has been promised change, only to see the same old problems persist. I’m not here to offer more empty promises, but a fundamental shift in how we approach governance – a commitment to building a Kingston where everyone has the opportunity to thrive.\nMy journey to this point has been shaped by countless conversations with communities across our islands, listening to their concerns, and understanding their hopes for the future. It’s become clear that people aren’t just looking for a leader who\ntells\nthem what’s best, but one who\nlistens\nand empowers them to shape their own destiny.\nThat’s why my campaign isn’t just about policies – it’s about building a movement. As I recently shared, ‘Kingston deserves leaders who\nlisten\n– who build power\nwith\ncommunities, not\nover\nthem.’ This isn’t rhetoric; it’s the guiding principle of my candidacy.\nMy vision is rooted in fairness and opportunity for all. We will invest in people through free tertiary education and expanded vocational grants, funded through a progressive tax system that ensures everyone contributes their fair share. We will protect our future by taking aggressive action on climate change, transitioning to a green economy, and ending harmful practices like offshore drilling.\nWe will build a fair economy by strengthening worker protections, supporting renters’ rights, and implementing policies to curb wealth inequality. We will reform policing and our justice system by prioritizing civilian oversight, demilitarization, and reinvestment in community programs. And we will champion human rights by ensuring full legal equality for all, robust anti-discrimination enforcement, and universal access to reproductive healthcare.\nThis isn’t just a platform; it’s a commitment to building a Kingston where everyone has the opportunity to reach their full potential. It’s time to move beyond promises and build a future where everyone thrives. Join me in building a Kingston where power rests with the people, not the privileged few.",
+      "summary": "For too long, Kingston has been promised change, only to see the same old problems persist. I’m not here to offer more empty promises, but a fundamental shift in how we approach governance – a commitment to building a Kingston where everyone has the opportunity to thrive.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/youths_playing_football_soccer.jpg",
+          "alt": "Beyond Promises- Building a Kingston Where Everyone Thrives",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/housing_under_construction.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:05.964011",
+      "status_code": 200,
+      "word_count": 315
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-08-20-a-kingston-for-all-investing-in-people-protecting-our-future/",
+      "title": "A Kingston For All- Investing in People, Protecting Our Future",
+      "content": "For too long, Kingston has been a nation of stark contrasts. Breathtaking beauty alongside growing inequality. Vibrant culture shadowed by economic insecurity. I, Victor Hawthorne, believe we can – and must – build a Kingston where everyone has the opportunity to thrive.\nI’m running for President because I believe in a Kingston where potential isn’t limited by circumstance, where our environment is safeguarded for future generations, and where fairness isn’t just a word, but a reality.\nMy campaign is built on five core pillars:\nInvest in People:\nEducation is the great equalizer. We will make tertiary education free and expand vocational grants, unlocking the potential of every Kingstonian. Progressive taxation will fund this investment, ensuring those who can contribute most, do so.\nProtect Our Future:\nClimate change isn’t a distant threat – it’s here. We will implement a carbon tax, invest in green public works, and bring an end to environmentally damaging offshore drilling.\nBuild a Fair Economy:\nWe need an economy that works for everyone, not just a select few. We will strengthen worker protections, champion renters’ rights, and implement policies to curb wealth inequality.\nReform Policing & Justice:\nTrust between communities and law enforcement is essential. We will implement civilian oversight, demilitarize our police forces, and reinvest in community programs.\nChampion Human Rights:\nEvery Kingstonian deserves equal rights and protections. We will ensure full legal equality, robust anti-discrimination enforcement, and universal access to reproductive healthcare.\nThis isn’t just a platform – it’s a promise. A promise to build a Kingston where everyone has a voice, where everyone has a chance, and where everyone can share in the prosperity of our beautiful nation. Join me in building a Kingston for all.",
+      "summary": "For too long, Kingston has been a nation of stark contrasts. Breathtaking beauty alongside growing inequality. Vibrant culture shadowed by economic insecurity. I, Victor Hawthorne, believe we can – and must – build a Kingston where everyone has the opportunity to thrive.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/youths_running_sport.jpg",
+          "alt": "A Kingston For All- Investing in People, Protecting Our Future",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:07.060119",
+      "status_code": 200,
+      "word_count": 282
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-a-kingston-for-all-investing-in-people-protecting-our-future/",
+      "title": "A Kingston For All- Investing in People, Protecting Our Future",
+      "content": "For too long, Kingston has been held back by short-sighted policies and a lack of vision. It’s time for a change. It’s time for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy works for all, not just a select few.\nMy campaign isn’t about empty promises; it’s about a fundamental shift in priorities. We must invest in our people. That’s why I’m proposing free tertiary education and expanded vocational grants, funded through a progressive tax system. As I’ve previously stated, a ‘Thriving Kingston demands empowered minds.’ Education isn’t a privilege; it’s a right, and it’s the key to unlocking potential across our nation.\nBut investing in people isn’t enough. We must also protect our future. The climate crisis is real, and it demands immediate action. My plan calls for aggressive action on climate change through carbon taxes, green public works, and an end to offshore drilling. We can create jobs, stimulate our economy, and protect our environment all at the same time.\nAnd let’s be clear: a fair economy isn’t just about economic growth; it’s about equity and opportunity. We must strengthen worker protections, support renters’ rights, and implement policies to curb wealth inequality. It’s time to build an economy that works for everyone, not just those at the top.\nFinally, we must reform our policing and justice systems. Civilian oversight, demilitarization, and reinvestment in community programs will build trust and safety. Championing human rights through full legal equality, robust anti-discrimination enforcement, and universal access to reproductive healthcare is non-negotiable.\nThis isn’t just a campaign; it’s a movement. It’s a movement for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy works for all. Join me, and let’s build a brighter future, together.",
+      "summary": "For too long, Kingston has been held back by short-sighted policies and a lack of vision. It’s time for a change. It’s time for a Kingston where everyone has the opportunity to thrive, where our environment is protected, and where our economy works for all, not just a select few.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "A Kingston For All- Investing in People, Protecting Our Future",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/youths_running_sport.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:07.609214",
+      "status_code": 200,
+      "word_count": 302
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-21-beyond-division-a-vision-for-a-united-kingston/",
+      "title": "Beyond Division- A Vision for a United Kingston",
+      "content": "For too long, Kingston has been fractured by division. We’ve allowed ideological battles to overshadow our common humanity and prevent us from tackling the real challenges facing our nation. But I believe we can build a better future – a future rooted in fairness, opportunity, and unity.\nMy journey, reflected in recent conversations and interactions, has reinforced this belief. I’ve come to realize that true progress isn’t about winning arguments; it’s about finding common ground and building bridges. As I shared recently, walking through Kingston City reminded me that ‘we’re all building a better life.’ That sentiment isn’t just a slogan; it’s the foundation of my campaign.\nMy vision for Kingston is ambitious, but achievable. We will invest in our people through free tertiary education and expanded vocational grants, funded by a progressive tax system that ensures everyone contributes their fair share. We will protect our future by taking aggressive action on climate change, ending offshore drilling, and investing in green public works. We will build a fair economy by strengthening worker protections, supporting renters’ rights, and curbing wealth inequality.\nBut this isn’t just about policies; it’s about a fundamental shift in how we approach governance. We will reform policing and the justice system, prioritizing community programs and civilian oversight to build trust and ensure safety for all. We will champion human rights, guaranteeing full legal equality and access to reproductive healthcare.\nSome may call this a radical vision. I call it common sense. It’s time to move beyond division and embrace a future where everyone has the opportunity to thrive. It’s time for a united Kingston. Join me.",
+      "summary": "For too long, Kingston has been fractured by division. We’ve allowed ideological battles to overshadow our common humanity and prevent us from tackling the real challenges facing our nation. But I believe we can build a better future – a future rooted in fairness, opportunity, and unity.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "Beyond Division- A Vision for a United Kingston",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:08.163480",
+      "status_code": 200,
+      "word_count": 269
+    },
+    {
+      "url": "https://victor-for-president.legitreal.com/post/2025-09-20-beyond-soundbites-a-vision-for-a-just-and-sustainable-kingston/",
+      "title": "Beyond Soundbites- A Vision for a Just and Sustainable Kingston",
+      "content": "For weeks, I’ve been travelling across Kingston, listening to the concerns of our communities. I’ve heard the anxieties about rising costs, the frustrations with stagnant wages, and the growing fear for our planet’s future. What I’ve also observed is a disturbing trend in this election: a reliance on soundbites, a lack of substantive debate, and a media landscape that often prioritizes personality over policy.\nI believe Kingston deserves better. We deserve a government that isn’t afraid to tackle the big challenges facing our nation – a government that prioritizes the needs of the many, not the few.\nMy vision for Kingston is rooted in fairness and opportunity for all. It’s a vision where every citizen has access to the education and skills they need to succeed, regardless of their background or postcode. That’s why I’m committed to free tertiary education and expanded vocational grants, funded through a progressive tax system that ensures everyone contributes their fair share.\nBut opportunity isn’t just about education. It’s also about protecting our environment and building a sustainable economy. We can’t afford to ignore the climate crisis any longer. That’s why I’m calling for aggressive action on climate change, including carbon taxes, green public works, and an end to offshore drilling. These aren’t just environmental policies; they’re economic opportunities, creating jobs and building a more resilient future.\nAnd let’s be clear: a strong economy requires a fair economy. We need to strengthen worker protections, support renters’ rights, and implement policies to curb wealth inequality. Everyone deserves a fair wage, safe working conditions, and a place to call home.\nFinally, we need to reform our policing and justice system. Civilian oversight, demilitarization, and reinvestment in community programs will build trust and safety, ensuring that everyone is treated with dignity and respect.\nThis isn’t just a campaign; it’s a movement. It’s a movement for a more just, sustainable, and equitable Kingston. I believe that together, we can build a future where everyone has the opportunity to thrive. This election, let’s move beyond the soundbites and choose a vision for a better future.",
+      "summary": "For weeks, I’ve been travelling across Kingston, listening to the concerns of our communities. I’ve heard the anxieties about rising costs, the frustrations with stagnant wages, and the growing fear for our planet’s future. What I’ve also observed is a disturbing trend in this election: a reliance on soundbites, a lack of substantive debate, and a media landscape that often prioritizes personality over policy.",
+      "date": "",
+      "author": "",
+      "tags": [],
+      "images": [
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "70",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/victor_hawthorne_serious.jpg",
+          "alt": "Beyond Soundbites- A Vision for a Just and Sustainable Kingston",
+          "title": "",
+          "width": "",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/site_images/author-victor-hawthorne.jpg",
+          "alt": "Victor Hawthorne",
+          "title": "",
+          "width": "90",
+          "height": ""
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/youths_playing_football_soccer.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        },
+        {
+          "url": "https://victor-for-president.legitreal.com/assets/post_images/jpg/university_buildings.jpg",
+          "alt": "",
+          "title": "",
+          "width": "",
+          "height": "30px"
+        }
+      ],
+      "scraped_at": "2025-09-21T21:02:08.721631",
+      "status_code": 200,
+      "word_count": 345
+    }
+  ],
+  "policies": [
+    {
+      "title": "Policies",
+      "content": "\nVictor Hawthorne’s vision for Kingston is rooted in fairness and opportunity for all. We will:Invest in People:Free tertiary education and expanded vocational grants, funded through progressive taxation, will unlock potential across Kingston.Protect Our Future:Aggressive action on climate change through carbon taxes, green public works, and an end to offshore drilling.Build a Fair Economy:Strengthen worker protections, support renters’ rights, and implement policies to curb wealth inequality.Reform Policing & Justice:Civilian oversight, demilitarization, and reinvestment in community programs will build trust and safety.Champion Human Rights:Full legal equality for all, robust anti-discrimination enforcement, and universal access to reproductive healthcare.\nVictor Hawthorne’s vision for Kingston is rooted in fairness and opportunity for all. We will:",
+      "word_count": 110
+    }
+  ],
+  "errors": [
+    "Error scraping article https://victor-for-president.legitreal.com/policies: Failed to scrape article https://victor-for-president.legitreal.com/policies: 404 Client Error: Not Found for url: https://victor-for-president.legitreal.com/policies"
+  ]
+}

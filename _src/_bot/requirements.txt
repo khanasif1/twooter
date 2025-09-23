@@ -9,3 +9,15 @@ requests>=2.31.0
 # colorama>=0.4.0      # For colored console output
 # schedule>=1.2.0      # For advanced scheduling features  
 # python-dotenv>=1.0.0 # For .env file support
+
+# Web scraping dependencies for Victor Campaign Scraper
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+lxml>=4.9.0
+
+# Optional: For better HTML parsing
+html5lib>=1.1
+
+# Azure OpenAI dependencies for AI content generation
+openai>=1.0.0
+azure-identity>=1.15.0

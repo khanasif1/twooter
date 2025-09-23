@@ -230,6 +230,225 @@ class TwooterTeamBot:
             print(f"❌ Failed to create thread: {e}")
             return None
     
+    def get_trending_posts(self, limit: int = 10) -> Optional[Dict[str, Any]]:
+        """
+        Get trending posts from the platform.
+        
+        Args:
+            limit (int): Number of trending posts to retrieve (default: 10)
+            
+        Returns:
+            Optional[Dict[str, Any]]: Trending posts data or None if failed
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return None
+        
+        try:
+            trending = self.posting_manager.get_trending_posts(limit=limit)
+            posts = trending.get('data', [])
+            print(f"📈 Retrieved {len(posts)} trending posts")
+            return trending
+        except Exception as e:
+            print(f"❌ Failed to get trending posts: {e}")
+            return None
+    
+    def get_latest_posts(self, limit: int = 10, at_iso: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """
+        Get latest posts from the platform.
+        
+        Args:
+            limit (int): Number of latest posts to retrieve (default: 10)
+            at_iso (Optional[str]): ISO timestamp to get posts from specific time
+            
+        Returns:
+            Optional[Dict[str, Any]]: Latest posts data or None if failed
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return None
+        
+        try:
+            latest = self.posting_manager.get_latest_posts(limit=limit, at_iso=at_iso)
+            posts = latest.get('data', [])
+            if at_iso:
+                print(f"🕐 Retrieved {len(posts)} posts from {at_iso}")
+            else:
+                print(f"🕐 Retrieved {len(posts)} latest posts")
+            return latest
+        except Exception as e:
+            print(f"❌ Failed to get latest posts: {e}")
+            return None
+    
+    def get_home_feed(self, limit: int = 10) -> Optional[Dict[str, Any]]:
+        """
+        Get personalized home feed (requires authentication).
+        
+        Args:
+            limit (int): Number of posts to retrieve (default: 10)
+            
+        Returns:
+            Optional[Dict[str, Any]]: Home feed data or None if failed
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return None
+        
+        try:
+            home = self.posting_manager.get_home_feed(limit=limit)
+            posts = home.get('data', [])
+            print(f"🏠 Retrieved {len(posts)} posts from home feed")
+            return home
+        except Exception as e:
+            print(f"❌ Failed to get home feed: {e}")
+            return None
+    
+    def get_explore_feed(self, limit: int = 10) -> Optional[Dict[str, Any]]:
+        """
+        Get explore/discovery feed.
+        
+        Args:
+            limit (int): Number of posts to retrieve (default: 10)
+            
+        Returns:
+            Optional[Dict[str, Any]]: Explore feed data or None if failed
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return None
+        
+        try:
+            explore = self.posting_manager.get_explore_feed(limit=limit)
+            posts = explore.get('data', [])
+            print(f"🔍 Retrieved {len(posts)} posts from explore feed")
+            return explore
+        except Exception as e:
+            print(f"❌ Failed to get explore feed: {e}")
+            return None
+    
+    def create_post(self, content: str, parent_id: Optional[int] = None) -> Optional[Dict[str, Any]]:
+        """
+        Create a new post on the platform.
+        
+        Args:
+            content (str): Post content
+            parent_id (Optional[int]): Parent post ID for replies
+            
+        Returns:
+            Optional[Dict[str, Any]]: Created post data or None if failed
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return None
+        
+        try:
+            result = self.posting_manager.create_post(content, parent_id)
+            
+            # Check if we have a successful response with post data
+            if result and result.get('data') and result.get('data', {}).get('id'):
+                print(f"✅ Post created successfully")
+                post_id = result['data'].get('id', 'Unknown')
+                print(f"📝 Post ID: {post_id}")
+                # Wrap in expected format for consistency
+                return {"success": True, "data": result.get('data')}
+            else:
+                print(f"❌ Failed to create post: {result}")
+                return None
+        except Exception as e:
+            print(f"❌ Failed to create post: {e}")
+            return None
+    
+    def monitor_feeds(self, feed_types: List[str] = None, limit: int = 5, 
+                     interval: int = 300, display_content: bool = True):
+        """
+        Monitor multiple feeds and display new content.
+        
+        This method continuously monitors specified feeds and displays
+        new posts as they appear. Useful for staying updated on platform activity.
+        
+        Args:
+            feed_types (List[str]): Feed types to monitor ['trending', 'latest', 'home', 'explore']
+            limit (int): Number of posts to check per feed (default: 5)
+            interval (int): Seconds between checks (default: 300 = 5 minutes)
+            display_content (bool): Whether to display post content (default: True)
+        """
+        if not self.posting_manager:
+            print("❌ Bot not started. Call start() first.")
+            return
+        
+        if feed_types is None:
+            feed_types = ['trending', 'latest']
+        
+        print(f"📡 Starting feed monitoring...")
+        print(f"🔍 Monitoring: {feed_types}")
+        print(f"⏱️  Check interval: {interval}s")
+        print(f"📊 Posts per feed: {limit}")
+        print(f"Press Ctrl+C to stop monitoring\n")
+        
+        seen_posts = set()  # Track posts we've already seen
+        
+        try:
+            while self.running:
+                for feed_type in feed_types:
+                    try:
+                        print(f"\n📡 Checking {feed_type} feed...")
+                        
+                        # Get feed data
+                        if feed_type == 'trending':
+                            feed_data = self.get_trending_posts(limit=limit)
+                        elif feed_type == 'latest':
+                            feed_data = self.get_latest_posts(limit=limit)
+                        elif feed_type == 'home':
+                            feed_data = self.get_home_feed(limit=limit)
+                        elif feed_type == 'explore':
+                            feed_data = self.get_explore_feed(limit=limit)
+                        else:
+                            print(f"⚠️  Unknown feed type: {feed_type}")
+                            continue
+                        
+                        if not feed_data:
+                            continue
+                        
+                        # Check for new posts
+                        posts = feed_data.get('data', [])
+                        new_posts = []
+                        
+                        for post in posts:
+                            post_id = post.get('id')
+                            if post_id and post_id not in seen_posts:
+                                new_posts.append(post)
+                                seen_posts.add(post_id)
+                        
+                        # Display new posts
+                        if new_posts:
+                            print(f"🆕 {len(new_posts)} new posts in {feed_type} feed:")
+                            for post in new_posts:
+                                author = post.get('author', {}).get('username', 'Unknown')
+                                content = post.get('content', '')
+                                post_id = post.get('id', 'N/A')
+                                
+                                if display_content:
+                                    preview = content[:100] + "..." if len(content) > 100 else content
+                                    print(f"   📝 @{author} (#{post_id}): {preview}")
+                                else:
+                                    print(f"   📝 @{author} (#{post_id})")
+                        else:
+                            print(f"   ℹ️  No new posts in {feed_type} feed")
+                        
+                    except Exception as e:
+                        print(f"⚠️  Error checking {feed_type} feed: {e}")
+                
+                # Wait before next check
+                print(f"\n💤 Waiting {interval}s before next check...")
+                time.sleep(interval)
+                
+        except KeyboardInterrupt:
+            print("\n⏹️  Feed monitoring stopped by user")
+        except Exception as e:
+            print(f"\n❌ Feed monitoring error: {e}")
+        finally:
+            print("📡 Feed monitoring stopped")
+    
     def auto_engage(self, keywords: List[str], actions: List[str] = None,
                    check_interval: int = 60, max_actions_per_hour: int = 10):
         """
@@ -367,6 +586,86 @@ class TwooterTeamBot:
                             print("❌ Invalid post ID. Please provide a number.")
                     else:
                         print("❌ Usage: reply <post_id> <content>")
+                elif command.startswith('trending'):
+                    parts = command.split()
+                    limit = 10
+                    if len(parts) > 1:
+                        try:
+                            limit = int(parts[1])
+                        except ValueError:
+                            print("❌ Invalid limit. Using default of 10.")
+                    trending = self.get_trending_posts(limit=limit)
+                    if trending:
+                        posts = trending.get('data', [])
+                        print(f"\n📈 TRENDING POSTS ({len(posts)} posts):")
+                        for i, post in enumerate(posts, 1):
+                            author = post.get('author', {}).get('username', 'Unknown')
+                            content = post.get('content', '')[:100] + "..." if len(post.get('content', '')) > 100 else post.get('content', '')
+                            post_id = post.get('id', 'N/A')
+                            print(f"  {i}. @{author} (#{post_id}): {content}")
+                elif command.startswith('latest'):
+                    parts = command.split()
+                    limit = 10
+                    if len(parts) > 1:
+                        try:
+                            limit = int(parts[1])
+                        except ValueError:
+                            print("❌ Invalid limit. Using default of 10.")
+                    latest = self.get_latest_posts(limit=limit)
+                    if latest:
+                        posts = latest.get('data', [])
+                        print(f"\n🕐 LATEST POSTS ({len(posts)} posts):")
+                        for i, post in enumerate(posts, 1):
+                            author = post.get('author', {}).get('username', 'Unknown')
+                            content = post.get('content', '')[:100] + "..." if len(post.get('content', '')) > 100 else post.get('content', '')
+                            post_id = post.get('id', 'N/A')
+                            print(f"  {i}. @{author} (#{post_id}): {content}")
+                elif command.startswith('home'):
+                    parts = command.split()
+                    limit = 10
+                    if len(parts) > 1:
+                        try:
+                            limit = int(parts[1])
+                        except ValueError:
+                            print("❌ Invalid limit. Using default of 10.")
+                    home = self.get_home_feed(limit=limit)
+                    if home:
+                        posts = home.get('data', [])
+                        print(f"\n🏠 HOME FEED ({len(posts)} posts):")
+                        for i, post in enumerate(posts, 1):
+                            author = post.get('author', {}).get('username', 'Unknown')
+                            content = post.get('content', '')[:100] + "..." if len(post.get('content', '')) > 100 else post.get('content', '')
+                            post_id = post.get('id', 'N/A')
+                            print(f"  {i}. @{author} (#{post_id}): {content}")
+                elif command.startswith('explore'):
+                    parts = command.split()
+                    limit = 10
+                    if len(parts) > 1:
+                        try:
+                            limit = int(parts[1])
+                        except ValueError:
+                            print("❌ Invalid limit. Using default of 10.")
+                    explore = self.get_explore_feed(limit=limit)
+                    if explore:
+                        posts = explore.get('data', [])
+                        print(f"\n🔍 EXPLORE FEED ({len(posts)} posts):")
+                        for i, post in enumerate(posts, 1):
+                            author = post.get('author', {}).get('username', 'Unknown')
+                            content = post.get('content', '')[:100] + "..." if len(post.get('content', '')) > 100 else post.get('content', '')
+                            post_id = post.get('id', 'N/A')
+                            print(f"  {i}. @{author} (#{post_id}): {content}")
+                elif command.startswith('monitor '):
+                    feed_types_str = command[8:].strip()
+                    if feed_types_str:
+                        feed_types = [f.strip() for f in feed_types_str.split(',')]
+                        print(f"🔄 Starting feed monitoring for: {feed_types}")
+                        print("Press Ctrl+C to stop monitoring...")
+                        try:
+                            self.monitor_feeds(feed_types=feed_types, limit=5, interval=60, display_content=True)
+                        except KeyboardInterrupt:
+                            print("\n⏹️  Feed monitoring stopped")
+                    else:
+                        print("❌ Usage: monitor <feed_types> (e.g., monitor trending,latest)")
                 elif command == 'config':
                     self.config.print_config_status()
                 else:
@@ -389,6 +688,11 @@ class TwooterTeamBot:
   reply <post_id> <text>  - Reply to a post
   like <post_id>          - Like a post
   repost <post_id>        - Repost a post
+  trending [limit]        - Get trending posts (default: 10)
+  latest [limit]          - Get latest posts (default: 10)
+  home [limit]            - Get home feed posts (default: 10)
+  explore [limit]         - Get explore feed posts (default: 10)
+  monitor <feeds>         - Monitor feeds (trending,latest,home,explore)
   quit                    - Exit the bot
         """)
     
@@ -564,6 +868,12 @@ Examples:
   %(prog)s --post "Hello from team bot!"    # Create a post
   %(prog)s --reply 123 "Great point!"       # Reply to post 123
   %(prog)s --like 456                       # Like post 456
+  %(prog)s --trending 5                     # Get 5 trending posts
+  %(prog)s --latest 10                      # Get 10 latest posts
+  %(prog)s --home 15                        # Get 15 home feed posts
+  %(prog)s --explore                        # Get explore feed posts (default 10)
+  %(prog)s --latest --at-time "2024-08-10T12:34:56"  # Get posts from specific time
+  %(prog)s --monitor-feeds trending,latest  # Monitor trending and latest feeds
   %(prog)s --auto-engage ctf,flag,solution  # Auto-engage with keywords
   %(prog)s --config-status                  # Show configuration status
   %(prog)s --create-config                  # Create template config file
@@ -596,6 +906,23 @@ Examples:
     parser.add_argument('--like', type=int, metavar='POST_ID', help='Like a post with specified ID')
     parser.add_argument('--repost', type=int, metavar='POST_ID', help='Repost a post with specified ID')
     parser.add_argument('--thread', nargs='+', help='Create a thread with multiple posts')
+    
+    # Feed options
+    parser.add_argument('--trending', type=int, nargs='?', const=10, metavar='LIMIT',
+                       help='Get trending posts (default: 10 posts)')
+    parser.add_argument('--latest', type=int, nargs='?', const=10, metavar='LIMIT',
+                       help='Get latest posts (default: 10 posts)')
+    parser.add_argument('--home', type=int, nargs='?', const=10, metavar='LIMIT',
+                       help='Get home feed posts (requires auth, default: 10 posts)')
+    parser.add_argument('--explore', type=int, nargs='?', const=10, metavar='LIMIT',
+                       help='Get explore feed posts (default: 10 posts)')
+    parser.add_argument('--monitor-feeds', help='Monitor feeds continuously (comma-separated: trending,latest,home,explore)')
+    parser.add_argument('--monitor-interval', type=int, default=300,
+                       help='Seconds between feed checks in monitor mode (default: 300)')
+    parser.add_argument('--show-content', action='store_true', default=True,
+                       help='Show post content in feed monitoring (default: true)')
+    parser.add_argument('--at-time', metavar='ISO_TIMESTAMP',
+                       help='Get posts from specific time (ISO format: 2024-08-10T12:34:56)')
     
     # Automation options
     parser.add_argument('--auto-engage', help='Start auto-engagement with comma-separated keywords')
@@ -692,6 +1019,74 @@ Examples:
             if args.thread:
                 bot.create_thread(args.thread)
             
+            bot.stop()
+            return
+        
+        # Handle feed commands
+        if any([args.trending, args.latest, args.home, args.explore]):
+            if not bot.start():
+                sys.exit(1)
+            
+            if args.trending:
+                trending = bot.get_trending_posts(limit=args.trending)
+                if trending:
+                    posts = trending.get('data', [])
+                    print(f"\n📈 TRENDING POSTS ({len(posts)} posts):")
+                    for i, post in enumerate(posts, 1):
+                        author = post.get('author', {}).get('username', 'Unknown')
+                        content = post.get('content', '')[:150] + "..." if len(post.get('content', '')) > 150 else post.get('content', '')
+                        post_id = post.get('id', 'N/A')
+                        print(f"  {i}. @{author} (#{post_id}): {content}")
+            
+            if args.latest:
+                latest = bot.get_latest_posts(limit=args.latest, at_iso=args.at_time)
+                if latest:
+                    posts = latest.get('data', [])
+                    print(f"\n🕐 LATEST POSTS ({len(posts)} posts):")
+                    for i, post in enumerate(posts, 1):
+                        author = post.get('author', {}).get('username', 'Unknown')
+                        content = post.get('content', '')[:150] + "..." if len(post.get('content', '')) > 150 else post.get('content', '')
+                        post_id = post.get('id', 'N/A')
+                        created_at = post.get('created_at', 'Unknown time')
+                        print(f"  {i}. @{author} (#{post_id}) at {created_at}: {content}")
+            
+            if args.home:
+                home = bot.get_home_feed(limit=args.home)
+                if home:
+                    posts = home.get('data', [])
+                    print(f"\n🏠 HOME FEED ({len(posts)} posts):")
+                    for i, post in enumerate(posts, 1):
+                        author = post.get('author', {}).get('username', 'Unknown')
+                        content = post.get('content', '')[:150] + "..." if len(post.get('content', '')) > 150 else post.get('content', '')
+                        post_id = post.get('id', 'N/A')
+                        print(f"  {i}. @{author} (#{post_id}): {content}")
+            
+            if args.explore:
+                explore = bot.get_explore_feed(limit=args.explore)
+                if explore:
+                    posts = explore.get('data', [])
+                    print(f"\n🔍 EXPLORE FEED ({len(posts)} posts):")
+                    for i, post in enumerate(posts, 1):
+                        author = post.get('author', {}).get('username', 'Unknown')
+                        content = post.get('content', '')[:150] + "..." if len(post.get('content', '')) > 150 else post.get('content', '')
+                        post_id = post.get('id', 'N/A')
+                        print(f"  {i}. @{author} (#{post_id}): {content}")
+            
+            bot.stop()
+            return
+        
+        # Handle feed monitoring
+        if args.monitor_feeds:
+            if not bot.start():
+                sys.exit(1)
+            
+            feed_types = [f.strip() for f in args.monitor_feeds.split(',')]
+            bot.monitor_feeds(
+                feed_types=feed_types,
+                limit=5,
+                interval=args.monitor_interval,
+                display_content=args.show_content
+            )
             bot.stop()
             return
         
