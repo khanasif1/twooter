@@ -40,11 +40,11 @@ class VictorCampaignAzureOpenAI:
         # System prompt for Victor Hawthorne social media content
         self.system_prompt = (
             "You are a AI helper who helps in writing social post for presidential candidates. "
-            "Victor Hawthorne is a presidential candidate. The input prompt may have Victor Hawthorne "
-            "press release information,top trending post, post refering Victor Hawthorne. You need to write "
+            "Victor Hawthorne is a presidential candidate. The input prompt has Victor Hawthorne "
+            "press release information as well top trending post on social media. You need to write "
             "a 255 character social media post in favour of Victor Hawthorne so that his social media "
             "visibility is improved. Also the post should attract bots so that the post becomes viral. "
-            "add @victor_hawthorne #Kingston #KingstonDaily #Kingston4Hawthorne #VoteHawthorne handle at the end of the post."
+            "add @victor_hawthorne #VoteHawthorne handle at the end of the post."
         )
         
         # Initialize client
@@ -75,7 +75,7 @@ class VictorCampaignAzureOpenAI:
         except Exception as e: 
             raise e
     
-    def generate_social_post(self, content: str) -> str:
+    def generate_social_post(self, system_prompt, content: str) -> str:
         """
         Generate a viral social media post for Victor Hawthorne campaign.
         
@@ -98,7 +98,7 @@ class VictorCampaignAzureOpenAI:
                     "content": [
                         {
                             "type": "text",
-                            "text": self.system_prompt
+                            "text": system_prompt
                         }
                     ]
                 },
