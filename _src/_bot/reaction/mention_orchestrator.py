@@ -14,7 +14,7 @@ import time
 import random
 
 
-def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: str) -> bool:
+def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: str) -> tuple[bool, int]:
     """
     Reply to a specific post using the generated AI content with rate limiting.
     
@@ -24,7 +24,7 @@ def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: 
         reply_content (str): The AI-generated reply content
         
     Returns:
-        bool: True if reply was posted successfully, False otherwise
+        tuple[bool, int]: (success, reply_id) - True if reply posted successfully and reply ID
     """
     max_retries = 3
     base_delay = 30  # Start with 30 seconds for rate limiting
@@ -42,12 +42,12 @@ def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: 
             
             # Check if result contains data (indicates success)
             if result and result.get('data'):
-                reply_id = result.get('data', {}).get('id', 'Unknown')
+                reply_id = result.get('data', {}).get('id', None)
                 print(f"   ✅ Successfully replied to post {post_id} with reply ID: {reply_id}")
-                return True
+                return True, reply_id
             else:
                 print(f"   ❌ Failed to reply to post {post_id}: No data in response")
-                return False
+                return False, None
                 
         except Exception as e:
             error_msg = str(e)
@@ -62,12 +62,112 @@ def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: 
                     continue
                 else:
                     print(f"   ❌ Max retries reached for post {post_id} due to rate limiting")
-                    return False
+                    return False, None
             else:
                 print(f"   ❌ Error replying to post {post_id}: {e}")
-                return False
+                return False, None
     
-    return False
+    return False, None
+
+
+def like_and_repost_posts(extractor: VictorPostsExtractor, original_post_id: int, reply_id: int = None) -> dict:
+    """
+    Like and repost both the original post and the reply post.
+    
+    Args:
+        extractor (VictorPostsExtractor): The already authenticated extractor instance
+        original_post_id (int): The ID of the original post to like and repost
+        reply_id (int, optional): The ID of the reply post to like and repost
+        
+    Returns:
+        dict: Results of like and repost operations
+    """
+    results = {
+        'original_like': False,
+        'original_repost': False,
+        'reply_like': False,
+        'reply_repost': False,
+        'errors': []
+    }
+    
+    try:
+        posting_manager = PostingManager(extractor.auth_manager)
+        
+        # Like and repost the original post
+        print(f"   👍 Liking original post {original_post_id}...")
+        try:
+            like_result = posting_manager.like_post(original_post_id)
+            if like_result:
+                results['original_like'] = True
+                print(f"   ✅ Successfully liked original post {original_post_id}")
+            else:
+                print(f"   ❌ Failed to like original post {original_post_id}")
+        except Exception as e:
+            error_msg = f"Error liking original post {original_post_id}: {e}"
+            results['errors'].append(error_msg)
+            print(f"   ❌ {error_msg}")
+        
+        # Small delay between operations
+        time.sleep(2)
+        
+        print(f"   🔄 Reposting original post {original_post_id}...")
+        try:
+            repost_result = posting_manager.repost(original_post_id)
+            if repost_result:
+                results['original_repost'] = True
+                print(f"   ✅ Successfully reposted original post {original_post_id}")
+            else:
+                print(f"   ❌ Failed to repost original post {original_post_id}")
+        except Exception as e:
+            error_msg = f"Error reposting original post {original_post_id}: {e}"
+            results['errors'].append(error_msg)
+            print(f"   ❌ {error_msg}")
+        
+        # Like and repost the reply if it exists
+        if reply_id:
+            time.sleep(2)
+            
+            print(f"   👍 Liking reply post {reply_id}...")
+            try:
+                like_result = posting_manager.like_post(reply_id)
+                if like_result:
+                    results['reply_like'] = True
+                    print(f"   ✅ Successfully liked reply post {reply_id}")
+                else:
+                    print(f"   ❌ Failed to like reply post {reply_id}")
+            except Exception as e:
+                error_msg = f"Error liking reply post {reply_id}: {e}"
+                results['errors'].append(error_msg)
+                print(f"   ❌ {error_msg}")
+            
+            time.sleep(2)
+            
+            print(f"   🔄 Reposting reply post {reply_id}...")
+            try:
+                repost_result = posting_manager.repost(reply_id)
+                if repost_result:
+                    results['reply_repost'] = True
+                    print(f"   ✅ Successfully reposted reply post {reply_id}")
+                else:
+                    print(f"   ❌ Failed to repost reply post {reply_id}")
+            except Exception as e:
+                error_msg = f"Error reposting reply post {reply_id}: {e}"
+                results['errors'].append(error_msg)
+                print(f"   ❌ {error_msg}")
+        
+        # Summary of operations
+        successful_ops = sum([results['original_like'], results['original_repost'], 
+                             results['reply_like'], results['reply_repost']])
+        total_ops = 2 + (2 if reply_id else 0)
+        
+        print(f"   📊 Engagement complete: {successful_ops}/{total_ops} operations successful")
+        
+    except Exception as e:
+        error_msg = f"Error in like_and_repost_posts: {e}"
+        results['errors'].append(error_msg)
+        print(f"   ❌ {error_msg}")
+    
+    return results
 
 
 def generate_replies_to_mentions(max_mentions: int = None):
@@ -171,10 +271,23 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             
             # Immediately reply to the original post with the generated content
             print(f"   📤 Posting reply to original post...")
-            success = reply_to_post(extractor, int(post_id), reply)
+            success, reply_id = reply_to_post(extractor, int(post_id), reply)
             
             if success:
                 print(f"   🎉 Successfully posted reply to @{author}'s post!")
+                
+                # Like and repost both the original post and the reply
+                print(f"   💫 Engaging with posts (like & repost)...")
+                engagement_results = like_and_repost_posts(extractor, int(post_id), reply_id)
+                
+                # Show engagement summary
+                if engagement_results['original_like'] or engagement_results['original_repost']:
+                    print(f"   ✅ Original post engagement successful")
+                if engagement_results['reply_like'] or engagement_results['reply_repost']:
+                    print(f"   ✅ Reply post engagement successful")
+                if engagement_results['errors']:
+                    print(f"   ⚠️  Some engagement operations failed")
+                
             else:
                 print(f"   ⚠️  Generated reply but failed to post it")
             
@@ -188,7 +301,7 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             print(f"   ❌ Error processing mention {idx}: {e}")
             continue
     
-    print(f"\n🎉 Reply generation and posting complete for all mentions!")
+    print(f"\n🎉 Reply generation, posting, and engagement complete for all mentions!")
 
 
 if __name__ == "__main__":
