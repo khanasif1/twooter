@@ -173,11 +173,11 @@ class PostOrchestrator:
             news_articles = news_data.get('main', [])
             
             if not news_articles:
-                print("⚠️  No news articles found. Creating fallback post...")
-                fallback_msg = "🇺🇸 Victor Hawthorne for President! Join the movement for fairness, opportunity, and a sustainable future. #VictorForPresident #FairnessForAll #ClimateAction"
+                print("⚠️  No news articles found. Generating AI-powered fallback post based on Victor's policies...")
+                fallback_msg = self._generate_policy_based_fallback_post(trending_data)
                 generated_posts.append({
                     "content": fallback_msg,
-                    "news_title": "Fallback Message",
+                    "news_title": "AI-Generated Policy Post",
                     "success": True
                 })
                 return generated_posts
@@ -283,6 +283,84 @@ class PostOrchestrator:
         content_parts.append("- Ending offshore drilling")
         content_parts.append("- Strengthening worker protections")
         content_parts.append("- Supporting renters' rights")
+        
+        combined_content = ''.join(content_parts)
+        
+        # Ensure content isn't too long for the AI model
+        if len(combined_content) > 2000:
+            combined_content = combined_content[:2000] + "..."
+        
+        return combined_content
+    
+    def _generate_policy_based_fallback_post(self, trending_data: Dict[str, Any]) -> str:
+        """
+        Generate an AI-powered fallback post based on Victor Hawthorne's core policies.
+        
+        Args:
+            trending_data (Dict[str, Any]): Current trending social media posts data
+            
+        Returns:
+            str: AI-generated social media post based on policies
+        """
+        try:
+            print("🤖 Generating AI-powered policy-based post...")
+            
+            # Prepare content for AI with Victor's key policies
+            policy_content = self._prepare_policy_content_for_ai(trending_data)
+            
+            # Generate post using Azure OpenAI
+            generated_post = self.ai_client.generate_social_post(policy_content)
+            
+            if generated_post and len(generated_post.strip()) > 0:
+                print(f"✅ Generated AI policy post ({len(generated_post)} characters)")
+                return generated_post
+            else:
+                print("⚠️ AI generation failed, using policy-based fallback")
+                # Return a policy-based fallback if AI fails
+                return "🇺🇸 Victor Hawthorne: Building a fairer Kingston with free education, climate action, worker protections, and human rights for all! Join the movement for progressive change. @victor_hawthorne #VictorForPresident #ProgressiveChange #Kingston"
+                
+        except Exception as e:
+            print(f"❌ Error generating AI policy post: {e}")
+            # Return a policy-based fallback if there's an error
+            return "🇺🇸 Victor Hawthorne: Building a fairer Kingston with free education, climate action, worker protections, and human rights for all! Join the movement for progressive change. @victor_hawthorne #VictorForPresident #ProgressiveChange #Kingston"
+    
+    def _prepare_policy_content_for_ai(self, trending_data: Dict[str, Any]) -> str:
+        """
+        Prepare Victor Hawthorne's policy content for AI generation when no news articles are available.
+        
+        Args:
+            trending_data (Dict[str, Any]): Current trending social media posts data
+            
+        Returns:
+            str: Formatted content focusing on Victor's core policies
+        """
+        content_parts = []
+        
+        # Add Victor Hawthorne's core policies
+        content_parts.append("Victor Hawthorne's Presidential Campaign - Core Policy Platform:")
+        content_parts.append("\n1. Invest in People: Free tertiary education and expanded vocational grants, funded through progressive taxation, will unlock potential across Kingston.")
+        content_parts.append("\n2. Protect Our Future: Aggressive action on climate change through carbon taxes, green public works, and an end to offshore drilling.")
+        content_parts.append("\n3. Build a Fair Economy: Strengthen worker protections, support renters' rights, and implement policies to curb wealth inequality.")
+        content_parts.append("\n4. Reform Policing & Justice: Civilian oversight, demilitarization, and reinvestment in community programs will build trust and safety.")
+        content_parts.append("\n5. Champion Human Rights: Full legal equality for all, robust anti-discrimination enforcement, and universal access to reproductive healthcare.")
+        
+        # Add trending context if available
+        content_parts.append("\n\nCurrent Trending Social Media Context:")
+        if trending_data.get('data'):
+            for i, post in enumerate(trending_data['data'][:3], 1):  # Use top 3 trending posts
+                author = post.get('author', {}).get('username', 'Unknown')
+                content = post.get('content', '')[:100]  # Limit content length
+                content_parts.append(f"\n{i}. @{author}: {content}")
+        else:
+            content_parts.append("\nNo specific trending topics available.")
+        
+        # Add campaign messaging guidance
+        content_parts.append("\n\nGenerate a compelling social media post that:")
+        content_parts.append("- Highlights Victor Hawthorne's progressive vision")
+        content_parts.append("- Connects to current social trends when possible")
+        content_parts.append("- Emphasizes fairness, opportunity, and positive change")
+        content_parts.append("- Appeals to voters who want real policy solutions")
+        content_parts.append("- Includes relevant hashtags and @victor_hawthorne mention")
         
         combined_content = ''.join(content_parts)
         
@@ -551,8 +629,7 @@ class PostOrchestrator:
             
             
             # Step 2: Get trending social media posts
-            trending_data = self.get_trending_social_data(limit=trending_limit)
-            print(f'Trending Data : {trending_data}')
+            trending_data = self.get_trending_social_data(limit=trending_limit)           
             results["steps"]["trending_data"] = {
                 "success": bool(trending_data.get('data')),
                 "posts_count": len(trending_data.get('data', [])),

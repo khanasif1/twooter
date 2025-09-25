@@ -2,9 +2,9 @@
 param(  [string]$Action = "help", 
         [string]$ContainerName,
         [string]$ResourceGroup = "rg_legit",
-        [string]$Location = "eastus", 
+        [string]$Location = "australiaeast", 
         [string]$ContainerInstanceName = "post-", 
-        [string]$DockerHubImage = "khanasif1/victor-post-orchestrator:smart_citizen_au", 
+        [string]$DockerHubImage = "khanasif1/victor-win-post", 
         [string]$SubscriptionId = "c0346e61-0f1f-411a-8c22-32620deb01cf")
 
 # Validate ContainerName parameter
@@ -65,6 +65,8 @@ function New-ContainerInstance {
     Write-Info "Creating Container Instance: $ContainerInstanceName"
     Write-Info "Using image: $DockerHubImage"
     
+    $DockerHubImage =$DockerHubImage +":"+ $ContainerName
+    Write-Info "Full image with tag: $DockerHubImage"
     # Clean up any existing container with the same name
     Write-Info "Checking for existing container..."
     $existing = az container show --resource-group $ResourceGroup --name $ContainerInstanceName --output json 2>$null
@@ -76,7 +78,7 @@ function New-ContainerInstance {
     
     # Try without registry credentials first (public image)
     Write-Info "Attempting deployment with public access..."
-    az container create --resource-group $ResourceGroup --name $ContainerInstanceName --image $DockerHubImage --dns-name-label $AciDnsName --cpu 0.5 --memory 1 --restart-policy Never --location $Location --os-type Linux --output table
+    az container create --resource-group $ResourceGroup --name $ContainerInstanceName --image $DockerHubImage --dns-name-label $AciDnsName --cpu 0.5 --memory 1.5 --restart-policy Never --location $Location --os-type Linux --output table
     
     if ($LASTEXITCODE -eq 0) {
         Write-Success "Container instance created!"

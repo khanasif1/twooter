@@ -8,10 +8,10 @@ if ([string]::IsNullOrWhiteSpace($BuildName)) {
     exit 1
 }
 
-$ImageName = "victor-post-orchestrator-$BuildName"
-$ContainerName = "victor-post-orchestrator-$BuildName"
+$ImageName = "victor-win-post-$BuildName"
+$ContainerName = "victor-win-post--$BuildName"
 $DockerHubRegistry = "khanasif1"
-$DockerHubImageName = "$DockerHubRegistry/victor-post-orchestrator:$BuildName"
+$DockerHubImageName = "$DockerHubRegistry/victor-win-post:$BuildName"
 
 
 

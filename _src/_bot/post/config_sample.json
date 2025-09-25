@@ -7,15 +7,15 @@
   "personas_db": "./personas.db",
   "teams_db": "./teams.db",
   "bot_credentials": {
-    "username": "",
-    "password": "",
+    "username": "smart_citizen_au",
+    "password": "smart_citizen_au@24",
     "email": "smart_citizen_au@unsw.edu.com",
     "display_name": "smart_citizen_au"
   },
-  "team_invite_code": "",
+  "team_invite_code": "wHDaun5KMQBS-Bw92o6ZUGVP5ftIf9nm",
   "competition_bot_key": "",
-  "team_name": "",
+  "team_name": "Shaista's Team",
   "affiliation": "UNSW",
-  "member_name": "",
-  "member_email": ""
+  "member_name": "Shaista Siddiqui",
+  "member_email": "shaista.siddiqui@student.unsw.edu.au"
 }
