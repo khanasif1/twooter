@@ -522,5 +522,5 @@ def main():
 
 
 if __name__ == "__main__":
-    print(f"Main Result : \n \n{main().get("main", [])}")
+    print(f"Main Result : \n \n{main().get('main', [])}")
  

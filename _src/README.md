@@ -558,3 +558,7 @@ python team_bot.py --generate-ai-post                    # Generate and post AI 
 python team_bot.py --ai-preview                          # Preview without posting  
 python team_bot.py --generate-ai-post --ai-post-count 3  # Generate 3 posts
 python team_bot.py --ai-preview --ai-trending-limit 15   # Analyze 15 trending posts
+
+
+python post_orchestrator.py --run-workflow
+python mention_orchestrator.py

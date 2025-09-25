@@ -28,7 +28,7 @@ from pathlib import Path
 from news_press_crawler import NewsPressCrawler
 from azure_openai_client import VictorCampaignAzureOpenAI
 from social_helper import TwooterTeamBot
-
+import random
 
 class PostOrchestrator:
     """
@@ -770,12 +770,34 @@ Examples:
         
         # Default: Run complete workflow
         if args.run_workflow or len(sys.argv) == 1:
-            results = orchestrator.run_complete_workflow(
-                trending_limit=args.trending_limit,
-                save_data=not args.no_save,
-                max_posts=args.max_posts
-            )
-            return 0 if results.get('success') else 1
+            runcount = 0
+            # Run in endless loop with random delays
+            while True:
+                runcount += 1
+                try:
+                    results = orchestrator.run_complete_workflow(
+                        trending_limit=args.trending_limit,
+                        save_data=not args.no_save,
+                        max_posts=args.max_posts
+                    )
+                    
+                    # Random delay between 5 and 30 seconds
+                    delay = random.randint(5, 30)
+                    print(f"\n⏰ Waiting {delay} seconds before next workflow run...")
+                    print ("*****************************")
+                    print (f"Completed run **{runcount}**")
+                    print ("*****************************")
+                    time.sleep(delay)
+                except KeyboardInterrupt:
+                    print("\n👋 Workflow loop interrupted by user")
+                    break
+                except Exception as e:
+                    print(f"❌ Error in workflow loop: {e}")
+                    # Wait before retrying on error
+                    delay = random.randint(10, 20)
+                    print(f"⏰ Waiting {delay} seconds before retry...")
+                    time.sleep(delay)
+            # return 0 if results.get('success') else 1
         
         # If no specific command, show help
         parser.print_help()

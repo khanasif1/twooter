@@ -271,6 +271,7 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             
             # Immediately reply to the original post with the generated content
             print(f"   📤 Posting reply to original post...")
+            time.sleep(random.randint(1, 17))
             success, reply_id = reply_to_post(extractor, int(post_id), reply)
             
             if success:
@@ -278,6 +279,7 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
                 
                 # Like and repost both the original post and the reply
                 print(f"   💫 Engaging with posts (like & repost)...")
+                time.sleep(random.randint(1, 15))
                 engagement_results = like_and_repost_posts(extractor, int(post_id), reply_id)
                 
                 # Show engagement summary
@@ -293,7 +295,7 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             
             # Add delay between mentions to prevent rate limiting
             if idx < len(mentions_to_process):  # Don't delay after the last one
-                delay = 15  # 15 seconds between each mention processing
+                delay = 30  # 30 seconds between each mention processing
                 print(f"   ⏱️  Waiting {delay}s before processing next mention...")
                 time.sleep(delay)
             

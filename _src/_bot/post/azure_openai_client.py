@@ -52,27 +52,53 @@ class VictorCampaignAzureOpenAI:
             
     def _initialize_client(self) -> AzureOpenAI:
         """
-        Initialize the Azure OpenAI client with Entra ID authentication.
+        Initialize the Azure OpenAI client with API key if available, otherwise use Entra ID authentication.
         
         Returns:
             AzureOpenAI: Configured client instance
         """
         try:
-            # Initialize Azure OpenAI client with Entra ID authentication
-            token_provider = get_bearer_token_provider(
-                DefaultAzureCredential(),
-                "https://cognitiveservices.azure.com/.default"
-            )
+            # Check for API key first
+            api_key = os.getenv("AZURE_OPENAI_API_KEY")
+            # Remove hardcoded key - use environment variable or Entra ID
+            
+            if api_key:
+                print("🔑 Using API key authentication")
+                print(f"🌐 Endpoint: {self.endpoint}")
+                print(f"🚀 Deployment: {self.deployment}")
+                print(f"📅 API Version: {self.api_version}")
+                
+                client = AzureOpenAI(
+                    azure_endpoint=self.endpoint,
+                    api_key=api_key,
+                    api_version=self.api_version,
+                )
+            else:
+                print("🛡️ Using Entra ID authentication")
+                print(f"🌐 Endpoint: {self.endpoint}")
+                print(f"🚀 Deployment: {self.deployment}")
+                print(f"📅 API Version: {self.api_version}")
+                
+                # Initialize Azure OpenAI client with Entra ID authentication
+                token_provider = get_bearer_token_provider(
+                    DefaultAzureCredential(),
+                    "https://cognitiveservices.azure.com/.default"
+                )
 
-            client = AzureOpenAI(
-                azure_endpoint=self.endpoint,
-                azure_ad_token_provider=token_provider,
-                api_version=self.api_version,
-            )            
+                client = AzureOpenAI(
+                    azure_endpoint=self.endpoint,
+                    azure_ad_token_provider=token_provider,                
+                    api_version=self.api_version,
+                )            
         
             return client
             
-        except Exception as e: 
+        except Exception as e:
+            print(f"❌ Error initializing Azure OpenAI client: {e}")
+            print(f"🔍 Endpoint: {self.endpoint}")
+            print(f"🔍 Deployment: {self.deployment}")
+            print(f"🔍 API Version: {self.api_version}")
+            print(f"🔍 Using API Key: {'Yes' if os.getenv('AZURE_OPENAI_API_KEY') else 'No'}")
             raise e
     
     def generate_social_post(self, content: str) -> str:
@@ -143,6 +169,52 @@ class VictorCampaignAzureOpenAI:
         except Exception as e:
             print(f"Error generating social post: {e}")
             raise
+    
+    def diagnose_authentication_error(self) -> Dict[str, Any]:
+        """
+        Diagnose common authentication issues and provide troubleshooting information.
+        
+        Returns:
+            Dict containing diagnostic information
+        """
+        diagnostics = {
+            "endpoint": self.endpoint,
+            "deployment": self.deployment,
+            "api_version": self.api_version,
+            "has_api_key": bool(os.getenv("AZURE_OPENAI_API_KEY")),
+            "endpoint_format_valid": False,
+            "common_issues": [],
+            "recommendations": []
+        }
+        
+        # Check endpoint format
+        if self.endpoint.startswith("https://") and ".openai.azure.com" in self.endpoint:
+            diagnostics["endpoint_format_valid"] = True
+        else:
+            diagnostics["common_issues"].append("Endpoint format invalid - should be https://[resource-name].openai.azure.com/")
+            diagnostics["recommendations"].append("Check your Azure OpenAI resource endpoint URL")
+        
+        # Check API key if using key authentication
+        api_key = os.getenv("AZURE_OPENAI_API_KEY")
+        if api_key:
+            if len(api_key) < 32:
+                diagnostics["common_issues"].append("API key appears too short")
+                diagnostics["recommendations"].append("Verify the API key is complete and valid")
+            
+            if not api_key.replace("-", "").replace("_", "").isalnum():
+                diagnostics["common_issues"].append("API key contains unexpected characters")
+                diagnostics["recommendations"].append("Ensure API key is copied correctly without extra spaces")
+        
+        # Common 401 error causes
+        diagnostics["common_401_causes"] = [
+            "Invalid or expired API key",
+            "Wrong Azure OpenAI endpoint URL",
+            "Incorrect region for your resource", 
+            "Resource subscription inactive or suspended",
+            "Model deployment name mismatch"
+        ]
+        
+        return diagnostics
     
     def test_connection(self) -> bool:
         """
@@ -249,6 +321,38 @@ def main():
         
     except Exception as e:
         print(f"❌ Error: {e}")
+        
+        # If it's a 401 error or similar authentication issue, provide diagnostics
+        if "401" in str(e) or "Access denied" in str(e) or "invalid subscription" in str(e):
+            print("\n🔍 Running diagnostics for authentication error...")
+            try:
+                client = VictorCampaignAzureOpenAI()
+                diagnostics = client.diagnose_authentication_error()
+                
+                print(f"\n📊 Diagnostic Information:")
+                print(f"🌐 Endpoint: {diagnostics['endpoint']}")
+                print(f"🚀 Deployment: {diagnostics['deployment']}")
+                print(f"📅 API Version: {diagnostics['api_version']}")
+                print(f"🔑 Has API Key: {diagnostics['has_api_key']}")
+                print(f"✅ Endpoint Format Valid: {diagnostics['endpoint_format_valid']}")
+                
+                if diagnostics['common_issues']:
+                    print(f"\n⚠️ Issues Found:")
+                    for issue in diagnostics['common_issues']:
+                        print(f"   • {issue}")
+                
+                if diagnostics['recommendations']:
+                    print(f"\n💡 Recommendations:")
+                    for rec in diagnostics['recommendations']:
+                        print(f"   • {rec}")
+                
+                print(f"\n🔍 Common 401 Error Causes:")
+                for cause in diagnostics['common_401_causes']:
+                    print(f"   • {cause}")
+                    
+            except Exception as diag_error:
+                print(f"Could not run diagnostics: {diag_error}")
+        
         return 1
 
 
