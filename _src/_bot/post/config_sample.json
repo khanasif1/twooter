@@ -1,0 +1,21 @@
+{
+  "base_url": "https://social.legitreal.com/api",
+  "timeout": 30,
+  "retry_attempts": 3,
+  "retry_delay": 1.0,
+  "tokens_db": "./tokens.db",
+  "personas_db": "./personas.db",
+  "teams_db": "./teams.db",
+  "bot_credentials": {
+    "username": "",
+    "password": "",
+    "email": "smart_citizen_au@unsw.edu.com",
+    "display_name": "smart_citizen_au"
+  },
+  "team_invite_code": "",
+  "competition_bot_key": "",
+  "team_name": "",
+  "affiliation": "UNSW",
+  "member_name": "",
+  "member_email": ""
+}
