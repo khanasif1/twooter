@@ -27,7 +27,7 @@ def reply_to_post(extractor: VictorPostsExtractor, post_id: int, reply_content: 
         tuple[bool, int]: (success, reply_id) - True if reply posted successfully and reply ID
     """
     max_retries = 3
-    base_delay = 30  # Start with 30 seconds for rate limiting
+    base_delay = 10  # Start with 30 seconds for rate limiting
     
     for attempt in range(max_retries):
         try:
@@ -193,8 +193,10 @@ def generate_replies_to_mentions(max_mentions: int = None):
     posts_mentioning_victor = extractor.get_posts_mentioning_victor_hawthorne()
     
     if not posts_mentioning_victor:
-        print("❌ No posts mentioning @victor_hawthorne found")
+        print("ℹ️  No new posts mentioning @victor_hawthorne found in this iteration")
         return
+    
+    print(f"🎯 Found {len(posts_mentioning_victor)} posts mentioning @victor_hawthorne")
     
     # Initialize Azure OpenAI client
     ai_client = VictorCampaignAzureOpenAI()
@@ -202,9 +204,12 @@ def generate_replies_to_mentions(max_mentions: int = None):
     # Limit mentions if specified
     mentions_to_process = posts_mentioning_victor[:max_mentions] if max_mentions else posts_mentioning_victor
     
-    print(f"\n🤖 Generating replies for {len(mentions_to_process)} posts mentioning @victor_hawthorne...")
-    if max_mentions:
-        print(f"   📋 Limited to first {max_mentions} mentions for rate limiting")
+    print(f"\n🤖 Processing {len(mentions_to_process)} posts mentioning @victor_hawthorne...")
+    if max_mentions and len(posts_mentioning_victor) > max_mentions:
+        print(f"   📋 Limited to first {max_mentions} mentions (found {len(posts_mentioning_victor)} total)")
+    
+    successful_replies = 0
+    total_processed = 0
     
     # System prompt for generating supportive replies
     reply_system_prompt = (
@@ -217,6 +222,7 @@ def generate_replies_to_mentions(max_mentions: int = None):
     
     # Loop through mentions to process
     for idx, post in enumerate(mentions_to_process, 1):
+        total_processed += 1
         try:
             print(f"\n📝 Processing mention {idx}/{len(mentions_to_process)}...")
             
@@ -271,15 +277,16 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             
             # Immediately reply to the original post with the generated content
             print(f"   📤 Posting reply to original post...")
-            time.sleep(random.randint(1, 17))
+            time.sleep(random.randint(1, 5))
             success, reply_id = reply_to_post(extractor, int(post_id), reply)
             
             if success:
+                successful_replies += 1
                 print(f"   🎉 Successfully posted reply to @{author}'s post!")
                 
                 # Like and repost both the original post and the reply
                 print(f"   💫 Engaging with posts (like & repost)...")
-                time.sleep(random.randint(1, 15))
+                time.sleep(random.randint(1, 5))
                 engagement_results = like_and_repost_posts(extractor, int(post_id), reply_id)
                 
                 # Show engagement summary
@@ -295,7 +302,7 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             
             # Add delay between mentions to prevent rate limiting
             if idx < len(mentions_to_process):  # Don't delay after the last one
-                delay = 30  # 30 seconds between each mention processing
+                delay = 5  # 5 seconds between each mention processing
                 print(f"   ⏱️  Waiting {delay}s before processing next mention...")
                 time.sleep(delay)
             
@@ -303,9 +310,66 @@ Generate a supportive reply that includes Victor Hawthorne's campaign themes and
             print(f"   ❌ Error processing mention {idx}: {e}")
             continue
     
-    print(f"\n🎉 Reply generation, posting, and engagement complete for all mentions!")
+    # Show summary statistics
+    print(f"\n📊 Iteration Summary:")
+    print(f"   📈 Posts processed: {total_processed}")
+    print(f"   ✅ Successful replies: {successful_replies}")
+    print(f"   ❌ Failed replies: {total_processed - successful_replies}")
+    if total_processed > 0:
+        success_rate = (successful_replies / total_processed) * 100
+        print(f"   📈 Success rate: {success_rate:.1f}%")
+    
+    print(f"\n🎉 Reply generation and engagement workflow complete!")
+    print(f"   Time completed: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+
+def run_continuous_monitoring():
+    """
+    Run the mention monitoring in an endless loop with proper pause intervals.
+    Logs each iteration and includes safety pauses to avoid hammering the API.
+    """
+    iteration = 1
+    print("🚀 Starting continuous mention monitoring loop...")
+    print("   Press Ctrl+C to stop the monitoring")
+    
+    try:
+        while True:
+            print(f"\n{'='*60}")
+            print(f"🔄 Starting monitoring iteration #{iteration}")
+            print(f"   Time: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"{'='*60}")
+            
+            try:
+                # Process mentions (limit to avoid overwhelming the API)
+                generate_replies_to_mentions(max_mentions=100)
+                
+                print(f"\n✅ Completed iteration #{iteration}")
+                
+            except Exception as e:
+                print(f"\n❌ Error in iteration #{iteration}: {e}")
+                print("   Continuing to next iteration...")
+            
+            # Pause between iterations to avoid hammering the API
+            pause_duration = 20  # 20 seconds between iterations
+            print(f"\n⏸️  Iteration #{iteration} complete. Pausing for {pause_duration} seconds...")
+            print(f"   Next iteration #{iteration + 1} will start at: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time() + pause_duration))}")
+            
+            # Show countdown for the last 30 seconds
+            for remaining in range(pause_duration, 0, -1):
+                if remaining <= 30 or remaining % 60 == 0:  # Show every minute, plus last 30 seconds
+                    print(f"   ⏱️  Next iteration in {remaining} seconds...")
+                time.sleep(1)
+            
+            iteration += 1
+            
+    except KeyboardInterrupt:
+        print(f"\n\n🛑 Monitoring stopped by user after {iteration - 1} iterations")
+        print("   Goodbye! 👋")
+    except Exception as e:
+        print(f"\n\n💥 Fatal error after {iteration - 1} iterations: {e}")
+        print("   Monitoring stopped unexpectedly")
 
 
 if __name__ == "__main__":
-    # Process only first 3 mentions to test rate limiting
-    generate_replies_to_mentions()
+    # Run continuous monitoring
+    run_continuous_monitoring()

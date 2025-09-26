@@ -1,0 +1,35 @@
+# Victor Campaign Reaction Orchestrator - Python Dependencies
+
+# Core dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+
+# Azure OpenAI integration
+openai>=1.0.0
+azure-identity>=1.15.0
+
+# Twitter/X API integration
+tweepy>=4.14.0
+
+# Utility libraries
+python-dotenv>=1.0.0
+urllib3>=2.0.0
+certifi>=2023.0.0
+charset-normalizer>=3.3.0
+idna>=3.4
+
+# JSON handling (built-in, but explicit for clarity)
+json5>=0.9.14
+
+# Time and scheduling
+schedule>=1.2.0
+
+# Type hints support
+typing-extensions>=4.8.0
+
+# Logging
+colorama>=0.4.6
+
+# Optional: For enhanced error reporting
+rich>=13.5.0

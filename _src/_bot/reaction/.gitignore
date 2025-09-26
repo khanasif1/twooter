@@ -1,0 +1,41 @@
+# Environment variables with sensitive data
+.env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database files
+*.db
+*.sqlite3
+
+# Token and credential files
+tokens.db
+*.token
+*.key
+
+# Log files
+*.log
+logs/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# Temporary files
+*.tmp
+*.temp
+temp/

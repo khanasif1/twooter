@@ -59,7 +59,7 @@ class VictorCampaignAzureOpenAI:
         """
         try:
             # Check for API key first
-            api_key = os.getenv("AZURE_OPENAI_API_KEY")
+            api_key = #os.getenv("AZURE_OPENAI_API_KEY")
             # Remove hardcoded key - use environment variable or Entra ID
             
             if api_key:
