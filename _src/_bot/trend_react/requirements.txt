@@ -1,0 +1,23 @@
+# Core Python packages
+requests==2.31.0
+python-dotenv==1.0.0
+
+# Azure OpenAI integration
+openai==1.54.3
+azure-identity==1.15.0
+
+# JSON processing and configuration
+jsonschema==4.20.0
+
+# Utility packages
+urllib3==2.1.0
+certifi==2023.11.17
+
+# Date and time utilities
+python-dateutil==2.8.2
+
+# Logging enhancements
+colorlog==6.8.0
+
+# Optional: For enhanced HTTP debugging
+httpx==0.25.2
