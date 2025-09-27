@@ -197,6 +197,12 @@ class PostOrchestrator:
                     # Generate social media post using Azure OpenAI
                     generated_post = self.ai_client.generate_social_post(combined_content)
                     
+                    # Add rate limiting delay after AI generation to prevent 429 errors
+                    if i < len(news_articles):
+                        ai_delay = 3  # 3 seconds between AI API calls
+                        print(f"   ⏳ Rate limiting: waiting {ai_delay}s before next AI generation...")
+                        time.sleep(ai_delay)
+                    
                     if generated_post:
                         print(f"   ✅ Generated post ({len(generated_post)} characters)")
                         print(f"   📱 Content: \"{generated_post[:100]}{'...' if len(generated_post) > 100 else ''}\"")
@@ -436,6 +442,8 @@ class PostOrchestrator:
         """
         print(f"\n📤 Step 4: Posting Social Media Content...")
         print("=" * 50)
+        print("⚠️  IMPORTANT: Ensure only ONE instance of this script is running")
+        print("⚠️  Multiple instances will cause rate limiting conflicts")
         
         posting_results = []
         
@@ -446,7 +454,12 @@ class PostOrchestrator:
                     raise Exception("Failed to start social media bot for posting")
             
             print(f"📝 Posting {len(generated_posts)} social media posts...")
-            print(f"⚠️  Note: Using rate limiting delays to avoid API limits")
+            print(f"⚠️  Note: Using enhanced rate limiting delays to avoid API limits")
+            
+            # Add initial delay before first post to avoid rapid API calls
+            initial_delay = 5
+            print(f"   ⏳ Initial delay: waiting {initial_delay}s before first post...")
+            time.sleep(initial_delay)
             
             # Loop through each generated post
             for i, post_data in enumerate(generated_posts, 1):
@@ -464,6 +477,12 @@ class PostOrchestrator:
                     
                     while retry_count < max_retries and not posted:
                         try:
+                            # Small delay before each posting attempt to avoid rapid API calls
+                            if retry_count > 0:  # Only add delay for retries, not first attempt
+                                pre_post_delay = 2
+                                print(f"   ⏳ Pre-posting delay: waiting {pre_post_delay}s...")
+                                time.sleep(pre_post_delay)
+                            
                             # Create the post using the social bot
                             post_result = self.social_bot.create_post(content)
                             
@@ -526,7 +545,8 @@ class PostOrchestrator:
                             if "429" in error_str or "Too Many Requests" in error_str:
                                 retry_count += 1
                                 if retry_count < max_retries:
-                                    wait_time = 30 * (2 ** (retry_count - 1))  # Exponential backoff: 30s, 60s, 120s
+                                    # More aggressive exponential backoff for posting: 10s, 20s, 40s
+                                    wait_time = 10 * (2 ** (retry_count - 1))
                                     print(f"   ⏳ Rate limit hit. Waiting {wait_time}s before retry {retry_count}/{max_retries}...")
                                     time.sleep(wait_time)
                                 else:
@@ -560,9 +580,12 @@ class PostOrchestrator:
                             "news_id": post_data.get('news_id', i)
                         })
                     
-                    # Add longer delay between posts to avoid rate limiting
+                    # Add enhanced delay between posts to avoid rate limiting
                     if i < len(generated_posts):
-                        wait_time = 15  # 15 seconds between posts
+                        base_wait_time = 20  # Increased from 15 to 20 seconds
+                        # Add random jitter to avoid synchronized requests (±3 seconds)
+                        jitter = random.randint(-3, 3)
+                        wait_time = base_wait_time + jitter
                         print(f"   ⏸️  Waiting {wait_time} seconds before next post...")
                         time.sleep(wait_time)
                 

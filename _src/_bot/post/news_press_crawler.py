@@ -58,6 +58,9 @@ class NewsPressCrawler:
         print("🚀 Starting News and Press Releases crawler...")
         print(f"🔍 Scanning: {self.index_url}")
         
+        # Clear processed URLs to allow re-crawling in loop scenarios
+        self.processed_urls.clear()
+        
         result = {
             "main": [],
             "metadata": {

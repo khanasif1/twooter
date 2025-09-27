@@ -21,3 +21,6 @@ html5lib>=1.1
 # Azure OpenAI dependencies for AI content generation
 openai>=1.0.0
 azure-identity>=1.15.0
+
+# System monitoring for rate limiting diagnostics
+psutil>=5.9.0

@@ -14,6 +14,7 @@ Features:
 """
 
 import os
+import time
 from typing import Optional, Dict, Any
 from openai import AzureOpenAI
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
@@ -59,7 +60,7 @@ class VictorCampaignAzureOpenAI:
         """
         try:
             # Check for API key first
-            api_key = ""#os.getenv("AZURE_OPENAI_API_KEY")
+            api_key = #os.getenv("AZURE_OPENAI_API_KEY")
             # Remove hardcoded key - use environment variable or Entra ID
             
             if api_key:
@@ -107,6 +108,7 @@ class VictorCampaignAzureOpenAI:
         
         This is the main inference function that takes string content as input
         and returns a string response optimized for social media virality.
+        Includes retry logic for rate limiting.
         
         Args:
             content (str): Input content containing press release information
@@ -116,59 +118,81 @@ class VictorCampaignAzureOpenAI:
             str: Generated social media post (255 characters or less)
         """
         print(f"Content: ********** {content}")
-        try:
-            # Construct the chat messages
-            messages = [
-                {
-                    "role": "system",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": self.system_prompt
-                        }
-                    ]
-                },
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": content
-                        }
-                    ]
-                }
-            ]
-            
-            # Generate completion
-            completion = self.client.chat.completions.create(
-                model=self.deployment,
-                messages=messages,
-                max_tokens=150,  # Limit tokens since we need 255 characters max
-                temperature=0.7,
-                top_p=0.95,
-                frequency_penalty=0,
-                presence_penalty=0,
-                stop=None,
-                stream=False
-            )
-            
-            # Extract the generated text
-            generated_text = completion.choices[0].message.content
-            
-            if not generated_text:
-                raise ValueError("No content generated from Azure OpenAI")
-            
-            # Ensure 255 character limit
-            if len(generated_text) > 255:
-                generated_text = generated_text[:252] + "..."
-                print(f"Generated text truncated to 255 characters")
-            
-            print(f"Successfully generated social post: {len(generated_text)} characters")
-            return generated_text.strip()
-            
-        except Exception as e:
-            print(f"Error generating social post: {e}")
-            raise
+        
+        max_retries = 3
+        retry_count = 0
+        
+        while retry_count < max_retries:
+            try:
+                # Construct the chat messages
+                messages = [
+                    {
+                        "role": "system",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": self.system_prompt
+                            }
+                        ]
+                    },
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": content
+                            }
+                        ]
+                    }
+                ]
+                
+                # Generate completion
+                completion = self.client.chat.completions.create(
+                    model=self.deployment,
+                    messages=messages,
+                    max_tokens=150,  # Limit tokens since we need 255 characters max
+                    temperature=0.7,
+                    top_p=0.95,
+                    frequency_penalty=0,
+                    presence_penalty=0,
+                    stop=None,
+                    stream=False
+                )
+                
+                # Extract the generated text
+                generated_text = completion.choices[0].message.content
+                
+                if not generated_text:
+                    raise ValueError("No content generated from Azure OpenAI")
+                
+                # Ensure 255 character limit
+                if len(generated_text) > 255:
+                    generated_text = generated_text[:252] + "..."
+                    print(f"Generated text truncated to 255 characters")
+                
+                print(f"Successfully generated social post: {len(generated_text)} characters")
+                return generated_text.strip()
+                
+            except Exception as e:
+                error_str = str(e)
+                
+                # Check if it's a rate limiting error
+                if "429" in error_str or "Too Many Requests" in error_str or "RateLimitReached" in error_str:
+                    retry_count += 1
+                    if retry_count < max_retries:
+                        wait_time = 5 * (2 ** (retry_count - 1))  # Exponential backoff: 5s, 10s, 20s
+                        print(f"⏳ Azure OpenAI rate limit hit. Waiting {wait_time}s before retry {retry_count}/{max_retries}...")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"❌ Azure OpenAI max retries reached for rate limiting")
+                        raise Exception(f"Azure OpenAI rate limit exceeded after {max_retries} retries")
+                else:
+                    # Non-rate-limit error, don't retry
+                    print(f"❌ Azure OpenAI error (non-rate-limit): {e}")
+                    raise
+        
+        # This shouldn't be reached, but just in case
+        raise Exception("Failed to generate social post after maximum retries")
     
     def diagnose_authentication_error(self) -> Dict[str, Any]:
         """

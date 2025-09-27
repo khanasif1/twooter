@@ -11,6 +11,7 @@
  # Deploy to Azure Container Instances Login :shaista
  .\ACI-Deployment.ps1 deploy shaista
  
+ 1..7 | ForEach-Object {  .\ACI-Deployment.ps1 deploy shaista}
  #***********LOGIN :smart_citizen***********
  # Build Image
 .\deploy.ps1 build smart-citizen
