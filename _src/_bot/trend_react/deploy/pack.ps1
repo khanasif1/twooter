@@ -50,3 +50,7 @@
  # Deploy to Azure Container Instances Login :smart_citizen
  .\ACI-Deployment.ps1 deploy smart-citizen-in
 
+
+#Deploy 20 instance
+
+1..7 | ForEach-Object { .\deploy.ps1 -Action deploy-azure -ImageTag "shaista" }

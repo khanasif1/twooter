@@ -33,7 +33,7 @@ class VictorCampaignAzureOpenAI:
             deployment: Model deployment name
         """
         # Configuration
-        self.endpoint = endpoint or os.getenv("ENDPOINT_URL", "https://ai-agent-hub-service.openai.azure.com/")
+        self.endpoint = endpoint or os.getenv("ENDPOINT_URL", "https://aoai-legi.services.ai.azure.com/")
         self.deployment = deployment or os.getenv("DEPLOYMENT_NAME", "gpt-4.1")
         self.api_version = "2025-01-01-preview"
         
@@ -59,7 +59,7 @@ class VictorCampaignAzureOpenAI:
         """
         try:
             # Check for API key first
-            api_key = #os.getenv("AZURE_OPENAI_API_KEY")
+            api_key = ""#os.getenv("AZURE_OPENAI_API_KEY")
             # Remove hardcoded key - use environment variable or Entra ID
             
             if api_key:
